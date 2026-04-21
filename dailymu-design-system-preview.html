@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DailyMu (Muniverse) Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=LINE+Seed+Sans+TH:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS — CSS VARIABLES
+   ============================================================ */
+
+:root {
+  /* --- Font --- */
+  --font-family-primary: 'LINE Seed Sans TH', sans-serif;
+
+  /* --- Typography Scale --- */
+  --heading-1-size: 48px; --heading-1-lh: 58px;
+  --heading-2-size: 40px; --heading-2-lh: 52px;
+  --heading-3-size: 32px; --heading-3-lh: 40px;
+  --heading-4-size: 28px; --heading-4-lh: 36px;
+  --heading-5-size: 24px; --heading-5-lh: 32px;
+  --label-1-size: 20px; --label-1-lh: 28px;
+  --label-2-size: 18px; --label-2-lh: 26px;
+  --label-3-size: 16px; --label-3-lh: 24px;
+  --label-4-size: 14px; --label-4-lh: 22px;
+  --label-5-size: 12px; --label-5-lh: 20px;
+  --caption-1-size: 20px; --caption-1-lh: 36px;
+  --caption-2-size: 18px; --caption-2-lh: 26px;
+  --caption-3-size: 16px; --caption-3-lh: 24px;
+  --caption-4-size: 14px; --caption-4-lh: 22px;
+  --caption-5-size: 12px; --caption-5-lh: 20px;
+
+  /* --- Spacing (4px base) --- */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* --- Radius --- */
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* --- Shadows --- */
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+
+  /* --- Motion --- */
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --easing-default: ease-in-out;
+  --easing-enter: ease-out;
+  --easing-exit: ease-in;
+
+  /* --- Z-Index --- */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 600;
+  --z-tooltip: 700;
+
+  /* --- Primitive Colors (shared) --- */
+  --pink-50: #FDEEF5; --pink-100: #FBDEEB; --pink-200: #F7BDD8;
+  --pink-300: #F49BC4; --pink-400: #EC599D; --pink-500: #EC599D;
+  --pink-600: #BD477E; --pink-700: #8E355E; --pink-800: #5F233F; --pink-900: #2F121F;
+
+  --violet-50: #F1F2FF; --violet-100: #E3E4FE; --violet-200: #C7C9FD;
+  --violet-300: #AAAFFD; --violet-400: #7279FB; --violet-500: #7279FB;
+  --violet-600: #5B61C9; --violet-700: #444997; --violet-800: #2D3165; --violet-900: #171832;
+
+  --red-50: #FDE9ED; --red-100: #FBD3DC; --red-200: #F7A7B9;
+  --red-300: #F27C95; --red-400: #EA244F; --red-500: #EA244F;
+  --red-600: #BB1D3F; --red-700: #8C162F; --red-800: #5E0F20; --red-900: #2F0710;
+
+  --orange-50: #FDF1EC; --orange-100: #FBE2DA; --orange-200: #F7C5B5;
+  --orange-300: #F4A98F; --orange-400: #EC6F45; --orange-500: #EC6F45;
+  --orange-600: #BD5937; --orange-700: #8E4329;
+
+  --yellow-50: #FEF9EB; --yellow-100: #FEF3D7; --yellow-200: #FCE6AE;
+  --yellow-300: #FBDA86; --yellow-400: #F8C135; --yellow-500: #F8C135;
+  --yellow-600: #C69A2A; --yellow-700: #957420;
+
+  --green-50: #F0F8F0; --green-100: #E1F2E0; --green-200: #C3E4C2;
+  --green-300: #A6D7A3; --green-400: #6ABC66; --green-500: #559652;
+  --green-600: #559652; --green-700: #40713D;
+
+  --sky-50: #E6F6FC; --sky-100: #CDEDF9; --sky-200: #9BDCF3;
+  --sky-300: #68CAEC; --sky-400: #36B9E6; --sky-500: #0386B3;
+  --sky-600: #0386B3; --sky-700: #026486;
+
+  --blue-50: #E9EDFD; --blue-100: #D3DAFB; --blue-200: #A7B5F7;
+  --blue-300: #7B90F3; --blue-400: #2346EB; --blue-500: #1C38BC;
+  --blue-600: #1C38BC; --blue-700: #152A8D;
+
+  --gray-50: #F8F8F9; --gray-100: #EBECEF; --gray-200: #CFD1D9;
+  --gray-300: #9A9DAD; --gray-400: #6A6E83; --gray-500: #3F414E;
+  --gray-600: #1B1D22; --gray-700: #101114; --gray-800: #0A0B0D;
+}
+
+/* ============================================================
+   DARK THEME (Default — Cosmic/Astrology)
+   ============================================================ */
+[data-theme="dark"] {
+  /* Semantic — Gray Neutral */
+  --fg-high: #FFFFFF;
+  --fg-mid: #9A9DAD;
+  --fg-low: #6A6E83;
+  --bg-surface: #0D0E12;
+  --bg-elevated: #161820;
+  --bg-card: #1B1D26;
+  --bg-subtle: #22242E;
+  --border-default: #2A2D3A;
+  --border-subtle: #1F2130;
+
+  /* Semantic — Primary (Pink) */
+  --primary: #EC599D;
+  --primary-fg: #FFFFFF;
+  --primary-hover: #F27BAF;
+  --primary-pressed: #BD477E;
+  --primary-bg-subtle: rgba(236,89,157,0.12);
+  --primary-border: #F7BDD8;
+
+  /* Semantic — Secondary (Violet) */
+  --secondary: #7279FB;
+  --secondary-fg: #FFFFFF;
+  --secondary-hover: #9499FC;
+  --secondary-pressed: #5B61C9;
+  --secondary-bg-subtle: rgba(114,121,251,0.12);
+  --secondary-border: #C7C9FD;
+
+  /* Semantic — Status */
+  --error: #EA244F;
+  --error-fg: #FFFFFF;
+  --error-bg-subtle: rgba(234,36,79,0.12);
+  --warning: #F8C135;
+  --warning-fg: #1B1D22;
+  --warning-bg-subtle: rgba(248,193,53,0.12);
+  --success: #6ABC66;
+  --success-fg: #FFFFFF;
+  --success-bg-subtle: rgba(106,188,102,0.12);
+  --info: #36B9E6;
+  --info-fg: #FFFFFF;
+  --info-bg-subtle: rgba(54,185,230,0.12);
+
+  /* Semantic — Disabled */
+  --disabled-fg: #3F414E;
+  --disabled-bg: #1F2130;
+  --disabled-border: #2A2D3A;
+
+  /* Overlays */
+  --overlay-light: rgba(16,17,20,0.5);
+  --overlay-medium: rgba(16,17,20,0.7);
+  --overlay-heavy: rgba(16,17,20,0.85);
+
+  /* Cosmic accents */
+  --cosmic-gradient: linear-gradient(135deg, #EC599D 0%, #7279FB 50%, #36B9E6 100%);
+  --cosmic-gradient-subtle: linear-gradient(135deg, rgba(236,89,157,0.2) 0%, rgba(114,121,251,0.2) 50%, rgba(54,185,230,0.2) 100%);
+  --star-glow: rgba(255,255,255,0.08);
+}
+
+/* ============================================================
+   LIGHT THEME
+   ============================================================ */
+[data-theme="light"] {
+  --fg-high: #1B1D22;
+  --fg-mid: #6A6E83;
+  --fg-low: #9A9DAD;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --bg-card: #F8F8F9;
+  --bg-subtle: #EBECEF;
+  --border-default: #EBECEF;
+  --border-subtle: #F8F8F9;
+
+  --primary: #EC599D;
+  --primary-fg: #FFFFFF;
+  --primary-hover: #BD477E;
+  --primary-pressed: #8E355E;
+  --primary-bg-subtle: #FDEEF5;
+  --primary-border: #F7BDD8;
+
+  --secondary: #7279FB;
+  --secondary-fg: #FFFFFF;
+  --secondary-hover: #5B61C9;
+  --secondary-pressed: #444997;
+  --secondary-bg-subtle: #F1F2FF;
+  --secondary-border: #C7C9FD;
+
+  --error: #EA244F;
+  --error-fg: #FFFFFF;
+  --error-bg-subtle: #FDE9ED;
+  --warning: #C69A2A;
+  --warning-fg: #FFFFFF;
+  --warning-bg-subtle: #FEF9EB;
+  --success: #559652;
+  --success-fg: #FFFFFF;
+  --success-bg-subtle: #F0F8F0;
+  --info: #0386B3;
+  --info-fg: #FFFFFF;
+  --info-bg-subtle: #E6F6FC;
+
+  --disabled-fg: #9A9DAD;
+  --disabled-bg: #EBECEF;
+  --disabled-border: #9A9DAD;
+
+  --overlay-light: rgba(16,17,20,0.3);
+  --overlay-medium: rgba(16,17,20,0.5);
+  --overlay-heavy: rgba(16,17,20,0.7);
+
+  --cosmic-gradient: linear-gradient(135deg, #EC599D 0%, #7279FB 50%, #36B9E6 100%);
+  --cosmic-gradient-subtle: linear-gradient(135deg, rgba(236,89,157,0.08) 0%, rgba(114,121,251,0.08) 50%, rgba(54,185,230,0.08) 100%);
+  --star-glow: rgba(0,0,0,0.04);
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-family-primary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--fg-high);
+  background: var(--bg-surface);
+  transition: background var(--duration-normal) var(--easing-default),
+              color var(--duration-normal) var(--easing-default);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.ds-page { max-width: 1440px; margin: 0 auto; padding: var(--space-10) var(--space-6); }
+
+.ds-hero {
+  text-align: center;
+  padding: var(--space-16) var(--space-6);
+  background: var(--cosmic-gradient-subtle);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-12);
+  position: relative;
+  overflow: hidden;
+}
+.ds-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, var(--star-glow) 1px, transparent 1px),
+              radial-gradient(circle at 80% 20%, var(--star-glow) 1px, transparent 1px),
+              radial-gradient(circle at 50% 70%, var(--star-glow) 1.5px, transparent 1.5px),
+              radial-gradient(circle at 10% 80%, var(--star-glow) 1px, transparent 1px),
+              radial-gradient(circle at 90% 60%, var(--star-glow) 1px, transparent 1px);
+  background-size: 200px 200px, 150px 150px, 180px 180px, 250px 250px, 170px 170px;
+  pointer-events: none;
+}
+.ds-hero h1 {
+  font-size: var(--heading-1-size);
+  line-height: var(--heading-1-lh);
+  font-weight: 800;
+  background: var(--cosmic-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-2);
+}
+.ds-hero .subtitle {
+  font-size: var(--caption-1-size);
+  color: var(--fg-mid);
+}
+
+.ds-section {
+  margin-bottom: var(--space-12);
+}
+.ds-section-title {
+  font-size: var(--heading-3-size);
+  line-height: var(--heading-3-lh);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  color: var(--fg-high);
+}
+.ds-section-desc {
+  font-size: var(--caption-3-size);
+  color: var(--fg-mid);
+  margin-bottom: var(--space-6);
+}
+
+.ds-subsection {
+  margin-bottom: var(--space-8);
+}
+.ds-subsection-title {
+  font-size: var(--heading-5-size);
+  line-height: var(--heading-5-lh);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+  color: var(--fg-high);
+}
+
+/* Grid helpers */
+.ds-grid { display: grid; gap: var(--space-4); }
+.ds-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.ds-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.ds-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.ds-grid-5 { grid-template-columns: repeat(5, 1fr); }
+.ds-grid-6 { grid-template-columns: repeat(6, 1fr); }
+.ds-flex { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.ds-flex-col { display: flex; flex-direction: column; gap: var(--space-3); }
+
+@media (max-width: 768px) {
+  .ds-grid-3, .ds-grid-4, .ds-grid-5, .ds-grid-6 { grid-template-columns: repeat(2, 1fr); }
+  .ds-hero h1 { font-size: var(--heading-3-size); }
+}
+
+/* ============================================================
+   THEME TOGGLE (Fixed)
+   ============================================================ */
+.theme-toggle {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-default);
+  box-shadow: var(--shadow-md);
+}
+.theme-toggle:hover { border-color: var(--primary); }
+.theme-toggle .icon { font-size: 20px; }
+.theme-toggle .label { font-size: var(--label-4-size); font-weight: 700; color: var(--fg-high); }
+
+/* ============================================================
+   NAV (TOC)
+   ============================================================ */
+.ds-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+  padding: var(--space-3);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+}
+.ds-nav a {
+  font-size: var(--label-4-size);
+  font-weight: 700;
+  color: var(--fg-mid);
+  text-decoration: none;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  transition: all var(--duration-fast) var(--easing-default);
+}
+.ds-nav a:hover { color: var(--primary); background: var(--primary-bg-subtle); }
+
+/* ============================================================
+   COLOR SWATCHES
+   ============================================================ */
+.color-row {
+  display: flex;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.color-swatch {
+  flex: 1;
+  min-height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--space-2);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+.color-swatch.light-text { color: #FFFFFF; }
+.color-swatch.dark-text { color: #1B1D22; }
+.color-swatch span { opacity: 0.85; }
+
+.semantic-card {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-default);
+  overflow: hidden;
+}
+.semantic-card-color {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--label-4-size);
+  font-weight: 700;
+}
+.semantic-card-info {
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-elevated);
+}
+.semantic-card-info .token-name { font-size: 11px; font-weight: 700; color: var(--fg-mid); }
+.semantic-card-info .token-value { font-size: 11px; color: var(--fg-low); }
+
+/* ============================================================
+   TYPOGRAPHY SAMPLES
+   ============================================================ */
+.type-sample {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+.type-sample:last-child { border-bottom: none; }
+.type-sample .meta {
+  flex-shrink: 0;
+  width: 160px;
+  font-size: var(--caption-5-size);
+  color: var(--fg-low);
+  line-height: 1.4;
+}
+.type-sample .meta strong { color: var(--fg-mid); display: block; font-size: var(--label-5-size); }
+.type-sample .preview { flex: 1; color: var(--fg-high); }
+
+/* ============================================================
+   SPACING VIS
+   ============================================================ */
+.spacing-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+.spacing-bar {
+  height: 24px;
+  background: var(--cosmic-gradient);
+  border-radius: var(--radius-xs);
+  transition: width var(--duration-normal) var(--easing-default);
+}
+.spacing-label {
+  font-size: var(--label-5-size);
+  font-weight: 700;
+  color: var(--fg-mid);
+  min-width: 80px;
+}
+.spacing-value {
+  font-size: var(--caption-5-size);
+  color: var(--fg-low);
+}
+
+/* ============================================================
+   RADIUS VIS
+   ============================================================ */
+.radius-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+.radius-box {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-bg-subtle);
+  border: 2px solid var(--primary);
+}
+.radius-info {
+  font-size: var(--caption-5-size);
+  color: var(--fg-mid);
+  text-align: center;
+  font-weight: 700;
+}
+
+/* ============================================================
+   SHADOW VIS
+   ============================================================ */
+.shadow-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+.shadow-box {
+  width: 100px;
+  height: 80px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+.shadow-info {
+  font-size: var(--caption-5-size);
+  color: var(--fg-mid);
+  text-align: center;
+  font-weight: 700;
+}
+
+/* ============================================================
+   COMPONENT STYLES — ATOMS
+   ============================================================ */
+
+/* --- Button --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-primary);
+  font-weight: 700;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-default);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.btn:active { transform: scale(0.97); }
+
+/* Sizes */
+.btn-sm { font-size: var(--label-4-size); height: 36px; padding: 0 var(--space-3); border-radius: var(--radius-sm); }
+.btn-md { font-size: var(--label-3-size); height: 44px; padding: 0 var(--space-5); border-radius: var(--radius-sm); }
+.btn-lg { font-size: var(--label-2-size); height: 52px; padding: 0 var(--space-6); border-radius: var(--radius-sm); }
+
+/* Filled */
+.btn-filled-primary { background: var(--primary); color: var(--primary-fg); }
+.btn-filled-primary:hover { background: var(--primary-hover); }
+.btn-filled-secondary { background: var(--secondary); color: var(--secondary-fg); }
+.btn-filled-secondary:hover { background: var(--secondary-hover); }
+
+/* Outlined */
+.btn-outlined-primary { background: transparent; color: var(--primary); border-color: var(--primary); }
+.btn-outlined-primary:hover { background: var(--primary-bg-subtle); }
+.btn-outlined-secondary { background: transparent; color: var(--secondary); border-color: var(--secondary); }
+.btn-outlined-secondary:hover { background: var(--secondary-bg-subtle); }
+
+/* Tonal */
+.btn-tonal-primary { background: var(--primary-bg-subtle); color: var(--primary); border-color: transparent; }
+.btn-tonal-primary:hover { opacity: 0.85; }
+.btn-tonal-secondary { background: var(--secondary-bg-subtle); color: var(--secondary); border-color: transparent; }
+
+/* Text */
+.btn-text-primary { background: transparent; color: var(--primary); border-color: transparent; }
+.btn-text-primary:hover { background: var(--primary-bg-subtle); }
+
+/* Ghost */
+.btn-ghost { background: transparent; color: var(--fg-mid); border-color: transparent; }
+.btn-ghost:hover { color: var(--fg-high); background: var(--star-glow); }
+
+/* Icon Button */
+.btn-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: var(--radius-full);
+  border: none; cursor: pointer; font-size: 20px;
+  transition: all var(--duration-fast) var(--easing-default);
+}
+.btn-icon-filled { background: var(--primary); color: var(--primary-fg); }
+.btn-icon-filled:hover { background: var(--primary-hover); }
+.btn-icon-outlined { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+.btn-icon-standard { background: transparent; color: var(--fg-mid); }
+.btn-icon-standard:hover { color: var(--fg-high); background: var(--star-glow); }
+
+/* Disabled */
+.btn-disabled, .btn-icon-disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.btn-disabled { background: var(--disabled-bg); color: var(--disabled-fg); border-color: transparent; }
+
+/* Loading */
+.btn-loading { pointer-events: none; opacity: 0.7; }
+.btn-loading .spinner {
+  width: 16px; height: 16px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- Text Field --- */
+.text-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+}
+.text-field-label {
+  font-size: var(--label-4-size);
+  font-weight: 700;
+  color: var(--fg-mid);
+}
+.text-field-input {
+  font-family: var(--font-family-primary);
+  font-size: var(--caption-3-size);
+  color: var(--fg-high);
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  outline: none;
+  transition: all var(--duration-fast) var(--easing-default);
+  height: 44px;
+}
+.text-field-input::placeholder { color: var(--fg-low); }
+.text-field-input:hover { border-color: var(--fg-mid); }
+.text-field-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-bg-subtle); }
+.text-field-input.error { border-color: var(--error); }
+.text-field-input.error:focus { box-shadow: 0 0 0 3px var(--error-bg-subtle); }
+.text-field-input:disabled { background: var(--disabled-bg); color: var(--disabled-fg); border-color: var(--disabled-border); cursor: not-allowed; }
+.text-field-helper {
+  font-size: var(--caption-5-size);
+  color: var(--fg-low);
+}
+.text-field-helper.error { color: var(--error); }
+
+/* --- Checkbox --- */
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  font-size: var(--caption-3-size);
+  color: var(--fg-high);
+  user-select: none;
+}
+.checkbox-box {
+  width: 20px; height: 20px;
+  border: 2px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--duration-fast) var(--easing-default);
+  background: transparent;
+  flex-shrink: 0;
+}
+.checkbox:hover .checkbox-box { border-color: var(--primary); }
+.checkbox.checked .checkbox-box {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-fg);
+}
+.checkbox.disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+
+/* --- Radio --- */
+.radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  font-size: var(--caption-3-size);
+  color: var(--fg-high);
+  user-select: none;
+}
+.radio-circle {
+  width: 20px; height: 20px;
+  border: 2px solid var(--border-default);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--duration-fast) var(--easing-default);
+  flex-shrink: 0;
+}
+.radio:hover .radio-circle { border-color: var(--primary); }
+.radio.selected .radio-circle { border-color: var(--primary); }
+.radio.selected .radio-circle::after {
+  content: '';
+  width: 10px; height: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+.radio.disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+
+/* --- Toggle/Switch --- */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+.toggle-track {
+  width: 48px; height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--border-default);
+  position: relative;
+  transition: all var(--duration-fast) var(--easing-default);
+}
+.toggle-thumb {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--fg-mid);
+  position: absolute;
+  top: 3px; left: 3px;
+  transition: all var(--duration-fast) var(--easing-default);
+}
+.toggle.on .toggle-track { background: var(--primary); }
+.toggle.on .toggle-thumb { left: 23px; background: #FFFFFF; }
+.toggle.disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+.toggle-label { font-size: var(--caption-3-size); color: var(--fg-high); }
+
+/* --- Badge --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  line-height: 1;
+}
+.badge-primary { background: var(--primary); color: var(--primary-fg); }
+.badge-secondary { background: var(--secondary); color: var(--secondary-fg); }
+.badge-error { background: var(--error); color: var(--error-fg); }
+.badge-dot {
+  width: 8px; height: 8px; min-width: 8px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+/* --- Chip --- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-family-primary);
+  font-size: var(--label-4-size);
+  font-weight: 700;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-default);
+  background: transparent;
+  color: var(--fg-high);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-default);
+}
+.chip:hover { border-color: var(--primary); color: var(--primary); }
+.chip.selected { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+.chip.disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+
+/* --- Avatar --- */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  color: var(--primary-fg);
+  background: var(--cosmic-gradient);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.avatar-sm { width: 32px; height: 32px; font-size: 12px; }
+.avatar-md { width: 40px; height: 40px; font-size: 14px; }
+.avatar-lg { width: 56px; height: 56px; font-size: 20px; }
+
+/* --- Divider --- */
+.divider {
+  height: 1px;
+  background: var(--border-default);
+  width: 100%;
+}
+.divider-inset { margin-left: var(--space-10); }
+
+/* ============================================================
+   COMPONENT STYLES — MOLECULES
+   ============================================================ */
+
+/* --- Search Bar --- */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  transition: all var(--duration-fast) var(--easing-default);
+}
+.search-bar:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-bg-subtle); }
+.search-bar .search-icon { color: var(--fg-low); font-size: 20px; flex-shrink: 0; }
+.search-bar input {
+  flex: 1; border: none; background: transparent; outline: none;
+  font-family: var(--font-family-primary);
+  font-size: var(--caption-3-size);
+  color: var(--fg-high);
+}
+.search-bar input::placeholder { color: var(--fg-low); }
+.search-bar .clear-btn {
+  width: 24px; height: 24px; border-radius: 50%; border: none;
+  background: var(--border-default); color: var(--fg-mid);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  transition: all var(--duration-fast) var(--easing-default);
+}
+.search-bar .clear-btn:hover { background: var(--fg-low); color: var(--fg-high); }
+
+/* --- List Item --- */
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-default);
+}
+.list-item:hover { background: var(--star-glow); }
+.list-item-content { flex: 1; min-width: 0; }
+.list-item-title { font-size: var(--label-3-size); font-weight: 700; color: var(--fg-high); }
+.list-item-subtitle { font-size: var(--caption-4-size); color: var(--fg-mid); }
+.list-item-trailing { font-size: var(--caption-4-size); color: var(--fg-low); flex-shrink: 0; }
+
+/* --- Snackbar/Toast --- */
+.snackbar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--caption-3-size);
+  box-shadow: var(--shadow-lg);
+}
+.snackbar-default { background: var(--bg-card); color: var(--fg-high); border: 1px solid var(--border-default); }
+.snackbar-success { background: var(--success-bg-subtle); color: var(--success); border: 1px solid var(--success); }
+.snackbar-error { background: var(--error-bg-subtle); color: var(--error); border: 1px solid var(--error); }
+.snackbar-warning { background: var(--warning-bg-subtle); color: var(--warning); border: 1px solid var(--warning); }
+.snackbar .snackbar-action {
+  font-weight: 700;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family-primary);
+  font-size: var(--label-4-size);
+}
+
+/* --- Tabs --- */
+.tab-bar {
+  display: flex;
+  border-bottom: 1px solid var(--border-default);
+}
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--label-3-size);
+  font-weight: 700;
+  color: var(--fg-mid);
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--duration-fast) var(--easing-default);
+  font-family: var(--font-family-primary);
+}
+.tab-item:hover { color: var(--fg-high); }
+.tab-item.active { color: var(--primary); }
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0; right: 0;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px 2px 0 0;
+}
+
+/* ============================================================
+   COMPONENT STYLES — ORGANISMS
+   ============================================================ */
+
+/* --- Top App Bar --- */
+.app-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  min-height: 56px;
+}
+.app-bar-title { flex: 1; font-size: var(--label-1-size); font-weight: 700; color: var(--fg-high); }
+.app-bar-actions { display: flex; gap: var(--space-1); }
+
+/* --- Bottom Navigation --- */
+.bottom-nav {
+  display: flex;
+  align-items: stretch;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.bottom-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-2) var(--space-1);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fg-low);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-default);
+  font-family: var(--font-family-primary);
+}
+.bottom-nav-item .nav-icon { font-size: 22px; }
+.bottom-nav-item:hover { color: var(--fg-mid); }
+.bottom-nav-item.active { color: var(--primary); }
+
+/* --- Card --- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--duration-fast) var(--easing-default);
+}
+.card:hover { box-shadow: var(--shadow-md); border-color: var(--border-default); }
+.card-image {
+  width: 100%;
+  height: 160px;
+  background: var(--cosmic-gradient-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: var(--fg-low);
+}
+.card-body { padding: var(--space-4); }
+.card-title { font-size: var(--label-2-size); font-weight: 700; color: var(--fg-high); margin-bottom: var(--space-1); }
+.card-desc { font-size: var(--caption-4-size); color: var(--fg-mid); margin-bottom: var(--space-3); }
+.card-actions { display: flex; gap: var(--space-2); }
+
+/* --- Dialog / Modal --- */
+.dialog-overlay {
+  position: relative;
+  background: var(--overlay-medium);
+  border-radius: var(--radius-md);
+  padding: var(--space-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dialog {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  max-width: 400px;
+  width: 100%;
+  box-shadow: var(--shadow-xl);
+}
+.dialog-title { font-size: var(--heading-5-size); font-weight: 700; color: var(--fg-high); margin-bottom: var(--space-2); }
+.dialog-body { font-size: var(--caption-3-size); color: var(--fg-mid); margin-bottom: var(--space-6); }
+.dialog-actions { display: flex; justify-content: flex-end; gap: var(--space-2); }
+
+/* --- Bottom Sheet --- */
+.bottom-sheet {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: var(--space-3) var(--space-4) var(--space-6);
+}
+.bottom-sheet-handle {
+  width: 40px; height: 4px;
+  background: var(--border-default);
+  border-radius: var(--radius-full);
+  margin: 0 auto var(--space-4);
+}
+.bottom-sheet-title { font-size: var(--label-1-size); font-weight: 700; color: var(--fg-high); margin-bottom: var(--space-3); }
+
+/* ============================================================
+   COMPONENT STATE DEMOS
+   ============================================================ */
+.state-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.state-label {
+  font-size: var(--caption-5-size);
+  color: var(--fg-low);
+  min-width: 70px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.component-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+.component-card-title {
+  font-size: var(--label-3-size);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.component-card-title::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+/* Support color grid */
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-2);
+}
+.support-swatch {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.support-swatch-color {
+  height: 48px;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-1);
+}
+.support-swatch-info {
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg-elevated);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--fg-mid);
+  border: 1px solid var(--border-default);
+  border-top: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+/* Form field molecule */
+.form-field { display: flex; flex-direction: column; gap: var(--space-4); }
+</style>
+</head>
+<body>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" onclick="toggleTheme()">
+  <span class="icon" id="themeIcon">&#9790;</span>
+  <span class="label" id="themeLabel">Dark</span>
+</button>
+
+<div class="ds-page">
+
+  <!-- ======================== HERO ======================== -->
+  <header class="ds-hero">
+    <h1>DailyMu Design System</h1>
+    <p class="subtitle">Muniverse: Personalizing mental wellness by syncing astrological data and AI insights</p>
+  </header>
+
+  <!-- ======================== NAV ======================== -->
+  <nav class="ds-nav">
+    <a href="#colors">Colors</a>
+    <a href="#typography">Typography</a>
+    <a href="#spacing">Spacing</a>
+    <a href="#radius">Radius</a>
+    <a href="#shadows">Shadows</a>
+    <a href="#buttons">Buttons</a>
+    <a href="#inputs">Inputs</a>
+    <a href="#controls">Controls</a>
+    <a href="#badges-chips">Badges & Chips</a>
+    <a href="#avatars">Avatars</a>
+    <a href="#molecules">Molecules</a>
+    <a href="#organisms">Organisms</a>
+  </nav>
+
+  <!-- ============================================================
+       1. COLORS
+       ============================================================ -->
+  <section class="ds-section" id="colors">
+    <h2 class="ds-section-title">Color System</h2>
+    <p class="ds-section-desc">Semantic color tokens สำหรับ Light + Dark mode ตาม cosmic/astrology theme</p>
+
+    <!-- Primary -->
+    <div class="ds-subsection">
+      <h3 class="ds-subsection-title">Primary (Pink)</h3>
+      <div class="color-row">
+        <div class="color-swatch dark-text" style="background:#FDEEF5"><span>50</span><span>#FDEEF5</span></div>
+        <div class="color-swatch dark-text" style="background:#FBDEEB"><span>100</span><span>#FBDEEB</span></div>
+        <div class="color-swatch dark-text" style="background:#F7BDD8"><span>200</span><span>#F7BDD8</span></div>
+        <div class="color-swatch dark-text" style="background:#F49BC4"><span>300</span><span>#F49BC4</span></div>
+        <div class="color-swatch light-text" style="background:#EC599D"><span>400/500</span><span>#EC599D</span></div>
+        <div class="color-swatch light-text" style="background:#BD477E"><span>600</span><span>#BD477E</span></div>
+        <div class="color-swatch light-text" style="background:#8E355E"><span>700</span><span>#8E355E</span></div>
+        <div class="color-swatch light-text" style="background:#5F233F"><span>800</span><span>#5F233F</span></div>
+        <div class="color-swatch light-text" style="background:#2F121F"><span>900</span><span>#2F121F</span></div>
+      </div>
+    </div>
+
+    <!-- Secondary -->
+    <div class="ds-subsection">
+      <h3 class="ds-subsection-title">Secondary (Violet)</h3>
+      <div class="color-row">
+        <div class="color-swatch dark-text" style="background:#F1F2FF"><span>50</span><span>#F1F2FF</span></div>
+        <div class="color-swatch dark-text" style="background:#E3E4FE"><span>100</span><span>#E3E4FE</span></div>
+        <div class="color-swatch dark-text" style="background:#C7C9FD"><span>200</span><span>#C7C9FD</span></div>
+        <div class="color-swatch dark-text" style="background:#AAAFFD"><span>300</span><span>#AAAFFD</span></div>
+        <div class="color-swatch light-text" style="background:#7279FB"><span>400/500</span><span>#7279FB</span></div>
+        <div class="color-swatch light-text" style="background:#5B61C9"><span>600</span><span>#5B61C9</span></div>
+        <div class="color-swatch light-text" style="background:#444997"><span>700</span><span>#444997</span></div>
+        <div class="color-swatch light-text" style="background:#2D3165"><span>800</span><span>#2D3165</span></div>
+        <div class="color-swatch light-text" style="background:#171832"><span>900</span><span>#171832</span></div>
+      </div>
+    </div>
+
+    <!-- Gray Neutral -->
+    <div class="ds-subsection">
+      <h3 class="ds-subsection-title">Gray Neutral</h3>
+      <div class="color-row">
+        <div class="color-swatch dark-text" style="background:#F8F8F9"><span>50</span><span>#F8F8F9</span></div>
+        <div class="color-swatch dark-text" style="background:#EBECEF"><span>100</span><span>#EBECEF</span></div>
+        <div class="color-swatch dark-text" style="background:#CFD1D9"><span>200</span><span>#CFD1D9</span></div>
+        <div class="color-swatch dark-text" style="background:#9A9DAD"><span>300</span><span>#9A9DAD</span></div>
+        <div class="color-swatch light-text" style="background:#6A6E83"><span>400</span><span>#6A6E83</span></div>
+        <div class="color-swatch light-text" style="background:#3F414E"><span>500</span><span>#3F414E</span></div>
+        <div class="color-swatch light-text" style="background:#1B1D22"><span>600</span><span>#1B1D22</span></div>
+        <div class="color-swatch light-text" style="background:#101114"><span>700</span><span>#101114</span></div>
+        <div class="color-swatch light-text" style="background:#0A0B0D"><span>800</span><span>#0A0B0D</span></div>
+      </div>
+    </div>
+
+    <!-- Semantic Status Colors -->
+    <div class="ds-subsection">
+      <h3 class="ds-subsection-title">Semantic Status</h3>
+      <div class="ds-grid ds-grid-4">
+        <div class="semantic-card">
+          <div class="semantic-card-color" style="background:var(--error);color:#FFF">Error</div>
+          <div class="semantic-card-info"><div class="token-name">semantic/error/fg/high</div><div class="token-value">#EA244F</div></div>
+        </div>
+        <div class="semantic-card">
+          <div class="semantic-card-color" style="background:var(--warning);color:#1B1D22">Warning</div>
+          <div class="semantic-card-info"><div class="token-name">semantic/warning/bg/high</div><div class="token-value">#F8C135</div></div>
+        </div>
+        <div class="semantic-card">
+          <div class="semantic-card-color" style="background:var(--success);color:#FFF">Success</div>
+          <div class="semantic-card-info"><div class="token-name">semantic/success/fg/high</div><div class="token-value">#559652</div></div>
+        </div>
+        <div class="semantic-card">
+          <div class="semantic-card-color" style="background:var(--info);color:#FFF">Info</div>
+          <div class="semantic-card-info"><div class="token-name">semantic/info/fg/high</div><div class="token-value">#0386B3</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Support Colors -->
+    <div class="ds-subsection">
+      <h3 class="ds-subsection-title">Support Colors</h3>
+      <div class="support-grid">
+        <div class="support-swatch"><div class="support-swatch-color" style="background:#EA244F"></div><div class="support-swatch-info">Red #EA244F</div></div>
+        <div class="support-swatch"><div class="support-swatch-color" style="background:#EC6F45"></div><div class="support-swatch-info">Orange #EC6F45</div></div>
+        <div class="support-swatch"><div class="support-swatch-color" style="background:#F8C135"></div><div class="support-swatch-info">Yellow #F8C135</div></div>
+        <div class="support-swatch"><div class="support-swatch-color" style="background:#6ABC66"></div><div class="support-swatch-info">Green #6ABC66</div></div>
+        <div class="support-swatch"><div class="support-swatch-color" style="background:#36B9E6"></div><div class="support-swatch-info">Sky #36B9E6</div></div>
+        <div class="support-swatch"><div class="support-swatch-color" style="background:#2346EB"></div><div class="support-swatch-info">Blue #2346EB</div></div>
+        <div class="support-swatch"><div class="support-swatch-color" style="background:#EC599D"></div><div class="support-swatch-info">Pink #EC599D</div></div>
+        <div class="support-swatch"><div class="support-swatch-color" style="background:#7279FB"></div><div class="support-swatch-info">Violet #7279FB</div></div>
+      </div>
+    </div>
+
+    <!-- Cosmic Gradient -->
+    <div class="ds-subsection">
+      <h3 class="ds-subsection-title">Cosmic Gradient (Brand)</h3>
+      <div style="height:80px;border-radius:var(--radius-sm);background:var(--cosmic-gradient);display:flex;align-items:center;justify-content:center;color:#FFF;font-weight:700;font-size:var(--label-2-size)">
+        Pink &rarr; Violet &rarr; Sky
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       2. TYPOGRAPHY
+       ============================================================ -->
+  <section class="ds-section" id="typography">
+    <h2 class="ds-section-title">Typography</h2>
+    <p class="ds-section-desc">LINE Seed Sans TH — Weights: Regular (400), Bold (700), ExtraBold (800)</p>
+
+    <div class="ds-subsection">
+      <h3 class="ds-subsection-title">Heading</h3>
+      <div class="type-sample">
+        <div class="meta"><strong>Heading.1</strong>48px / 58px / Bold</div>
+        <div class="preview" style="font-size:48px;line-height:58px;font-weight:700">Muniverse</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Heading.2</strong>40px / 52px / Bold</div>
+        <div class="preview" style="font-size:40px;line-height:52px;font-weight:700">Daily Horoscope</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Heading.3</strong>32px / 40px / Bold</div>
+        <div class="preview" style="font-size:32px;line-height:40px;font-weight:700">ดวงรายวัน</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Heading.4</strong>28px / 36px / Bold</div>
+        <div class="preview" style="font-size:28px;line-height:36px;font-weight:700">AI Insights</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Heading.5</strong>24px / 32px / Bold</div>
+        <div class="preview" style="font-size:24px;line-height:32px;font-weight:700">Moon Phase</div>
+      </div>
+    </div>
+
+    <div class="ds-subsection">
+      <h3 class="ds-subsection-title">Label</h3>
+      <div class="type-sample">
+        <div class="meta"><strong>Label.1</strong>20px / 28px / Bold</div>
+        <div class="preview" style="font-size:20px;line-height:28px;font-weight:700">สมัครสมาชิก Premium</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Label.2</strong>18px / 26px / Bold</div>
+        <div class="preview" style="font-size:18px;line-height:26px;font-weight:700">ดูดวงวันนี้</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Label.3</strong>16px / 24px / Bold</div>
+        <div class="preview" style="font-size:16px;line-height:24px;font-weight:700">Button Label</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Label.4</strong>14px / 22px / Bold</div>
+        <div class="preview" style="font-size:14px;line-height:22px;font-weight:700">Tag / Small Label</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Label.5</strong>12px / 20px / Bold</div>
+        <div class="preview" style="font-size:12px;line-height:20px;font-weight:700">BADGE / MICRO</div>
+      </div>
+    </div>
+
+    <div class="ds-subsection">
+      <h3 class="ds-subsection-title">Caption (Body)</h3>
+      <div class="type-sample">
+        <div class="meta"><strong>Caption.1</strong>20px / 36px / Regular</div>
+        <div class="preview" style="font-size:20px;line-height:36px;font-weight:400">วันนี้ดาวพฤหัสบดีอยู่ในตำแหน่งที่ดี ส่งผลให้เรื่องการเงินราบรื่น</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Caption.2</strong>18px / 26px / Regular</div>
+        <div class="preview" style="font-size:18px;line-height:26px;font-weight:400">Personalizing mental wellness by syncing astrological data</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Caption.3</strong>16px / 24px / Regular</div>
+        <div class="preview" style="font-size:16px;line-height:24px;font-weight:400">เช็คดวงประจำวันของคุณพร้อม AI วิเคราะห์</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Caption.4</strong>14px / 22px / Regular</div>
+        <div class="preview" style="font-size:14px;line-height:22px;font-weight:400">Updated 5 minutes ago</div>
+      </div>
+      <div class="type-sample">
+        <div class="meta"><strong>Caption.5</strong>12px / 20px / Regular</div>
+        <div class="preview" style="font-size:12px;line-height:20px;font-weight:400">Terms & Conditions apply</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. SPACING
+       ============================================================ -->
+  <section class="ds-section" id="spacing">
+    <h2 class="ds-section-title">Spacing Scale</h2>
+    <p class="ds-section-desc">4px base unit system</p>
+    <div style="max-width:600px">
+      <div class="spacing-item"><span class="spacing-label">space-1</span><div class="spacing-bar" style="width:4px"></div><span class="spacing-value">4px</span></div>
+      <div class="spacing-item"><span class="spacing-label">space-2</span><div class="spacing-bar" style="width:16px"></div><span class="spacing-value">8px</span></div>
+      <div class="spacing-item"><span class="spacing-label">space-3</span><div class="spacing-bar" style="width:24px"></div><span class="spacing-value">12px</span></div>
+      <div class="spacing-item"><span class="spacing-label">space-4</span><div class="spacing-bar" style="width:32px"></div><span class="spacing-value">16px</span></div>
+      <div class="spacing-item"><span class="spacing-label">space-5</span><div class="spacing-bar" style="width:40px"></div><span class="spacing-value">20px</span></div>
+      <div class="spacing-item"><span class="spacing-label">space-6</span><div class="spacing-bar" style="width:48px"></div><span class="spacing-value">24px</span></div>
+      <div class="spacing-item"><span class="spacing-label">space-8</span><div class="spacing-bar" style="width:64px"></div><span class="spacing-value">32px</span></div>
+      <div class="spacing-item"><span class="spacing-label">space-10</span><div class="spacing-bar" style="width:80px"></div><span class="spacing-value">40px</span></div>
+      <div class="spacing-item"><span class="spacing-label">space-12</span><div class="spacing-bar" style="width:96px"></div><span class="spacing-value">48px</span></div>
+      <div class="spacing-item"><span class="spacing-label">space-16</span><div class="spacing-bar" style="width:128px"></div><span class="spacing-value">64px</span></div>
+      <div class="spacing-item"><span class="spacing-label">space-20</span><div class="spacing-bar" style="width:160px"></div><span class="spacing-value">80px</span></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. RADIUS
+       ============================================================ -->
+  <section class="ds-section" id="radius">
+    <h2 class="ds-section-title">Corner Radius</h2>
+    <p class="ds-section-desc">Shape tokens สำหรับ border-radius</p>
+    <div class="ds-flex" style="gap:var(--space-6)">
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-none)"></div><div class="radius-info">none<br>0px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-xs)"></div><div class="radius-info">xs<br>4px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-sm)"></div><div class="radius-info">sm<br>8px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-md)"></div><div class="radius-info">md<br>12px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-lg)"></div><div class="radius-info">lg<br>16px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-xl)"></div><div class="radius-info">xl<br>24px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-full)"></div><div class="radius-info">full<br>9999px</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. SHADOWS
+       ============================================================ -->
+  <section class="ds-section" id="shadows">
+    <h2 class="ds-section-title">Elevation / Shadows</h2>
+    <p class="ds-section-desc">Shadow tokens สำหรับ depth hierarchy</p>
+    <div class="ds-flex" style="gap:var(--space-6)">
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:var(--shadow-none)"></div><div class="shadow-info">none</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:var(--shadow-xs)"></div><div class="shadow-info">xs</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:var(--shadow-sm)"></div><div class="shadow-info">sm</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:var(--shadow-md)"></div><div class="shadow-info">md</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:var(--shadow-lg)"></div><div class="shadow-info">lg</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:var(--shadow-xl)"></div><div class="shadow-info">xl</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. BUTTONS (Atoms)
+       ============================================================ -->
+  <section class="ds-section" id="buttons">
+    <h2 class="ds-section-title">Buttons</h2>
+    <p class="ds-section-desc">Filled, Outlined, Tonal, Text, Ghost + Icon Buttons</p>
+
+    <!-- Filled -->
+    <div class="component-card ds-subsection">
+      <div class="component-card-title">Filled Buttons</div>
+      <div class="ds-flex-col" style="gap:var(--space-4)">
+        <div class="state-row"><span class="state-label">Primary</span>
+          <button class="btn btn-filled-primary btn-sm">Small</button>
+          <button class="btn btn-filled-primary btn-md">Medium</button>
+          <button class="btn btn-filled-primary btn-lg">Large</button>
+        </div>
+        <div class="state-row"><span class="state-label">Secondary</span>
+          <button class="btn btn-filled-secondary btn-sm">Small</button>
+          <button class="btn btn-filled-secondary btn-md">Medium</button>
+          <button class="btn btn-filled-secondary btn-lg">Large</button>
+        </div>
+        <div class="state-row"><span class="state-label">Disabled</span>
+          <button class="btn btn-disabled btn-md">Disabled</button>
+        </div>
+        <div class="state-row"><span class="state-label">Loading</span>
+          <button class="btn btn-filled-primary btn-md btn-loading"><span class="spinner"></span>Loading</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Outlined -->
+    <div class="component-card ds-subsection">
+      <div class="component-card-title">Outlined Buttons</div>
+      <div class="ds-flex">
+        <button class="btn btn-outlined-primary btn-md">Primary</button>
+        <button class="btn btn-outlined-secondary btn-md">Secondary</button>
+      </div>
+    </div>
+
+    <!-- Tonal & Text -->
+    <div class="component-card ds-subsection">
+      <div class="component-card-title">Tonal & Text Buttons</div>
+      <div class="ds-flex">
+        <button class="btn btn-tonal-primary btn-md">Tonal Primary</button>
+        <button class="btn btn-tonal-secondary btn-md">Tonal Secondary</button>
+        <button class="btn btn-text-primary btn-md">Text</button>
+        <button class="btn btn-ghost btn-md">Ghost</button>
+      </div>
+    </div>
+
+    <!-- Icon Buttons -->
+    <div class="component-card ds-subsection">
+      <div class="component-card-title">Icon Buttons</div>
+      <div class="ds-flex">
+        <button class="btn-icon btn-icon-filled">&#9733;</button>
+        <button class="btn-icon btn-icon-outlined">&#9829;</button>
+        <button class="btn-icon btn-icon-standard">&#9881;</button>
+        <button class="btn-icon btn-icon-standard btn-icon-disabled">&#9998;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. TEXT INPUTS (Atoms)
+       ============================================================ -->
+  <section class="ds-section" id="inputs">
+    <h2 class="ds-section-title">Text Fields</h2>
+    <p class="ds-section-desc">Input fields พร้อมทุก state</p>
+
+    <div class="ds-grid ds-grid-2">
+      <div class="component-card">
+        <div class="component-card-title">Default</div>
+        <div class="text-field">
+          <label class="text-field-label">Email</label>
+          <input class="text-field-input" type="email" placeholder="you@dailymu.com">
+          <span class="text-field-helper">กรอก email ที่ใช้สมัคร</span>
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-card-title">Focused</div>
+        <div class="text-field">
+          <label class="text-field-label">Username</label>
+          <input class="text-field-input" type="text" value="cosmic_user" style="border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-bg-subtle)">
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-card-title">Error</div>
+        <div class="text-field">
+          <label class="text-field-label">Password</label>
+          <input class="text-field-input error" type="password" value="123">
+          <span class="text-field-helper error">รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร</span>
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-card-title">Disabled</div>
+        <div class="text-field">
+          <label class="text-field-label">Plan</label>
+          <input class="text-field-input" type="text" value="Premium" disabled>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. CONTROLS (Atoms)
+       ============================================================ -->
+  <section class="ds-section" id="controls">
+    <h2 class="ds-section-title">Controls</h2>
+    <p class="ds-section-desc">Checkbox, Radio, Toggle</p>
+
+    <div class="ds-grid ds-grid-3">
+      <!-- Checkbox -->
+      <div class="component-card">
+        <div class="component-card-title">Checkbox</div>
+        <div class="ds-flex-col">
+          <label class="checkbox" onclick="this.classList.toggle('checked')">
+            <span class="checkbox-box">&#10003;</span> Unchecked
+          </label>
+          <label class="checkbox checked" onclick="this.classList.toggle('checked')">
+            <span class="checkbox-box">&#10003;</span> Checked
+          </label>
+          <label class="checkbox disabled">
+            <span class="checkbox-box"></span> Disabled
+          </label>
+        </div>
+      </div>
+
+      <!-- Radio -->
+      <div class="component-card">
+        <div class="component-card-title">Radio Button</div>
+        <div class="ds-flex-col">
+          <label class="radio" onclick="selectRadio(this)">
+            <span class="radio-circle"></span> ราศีเมษ
+          </label>
+          <label class="radio selected" onclick="selectRadio(this)">
+            <span class="radio-circle"></span> ราศีพฤษภ
+          </label>
+          <label class="radio disabled">
+            <span class="radio-circle"></span> Disabled
+          </label>
+        </div>
+      </div>
+
+      <!-- Toggle -->
+      <div class="component-card">
+        <div class="component-card-title">Toggle / Switch</div>
+        <div class="ds-flex-col">
+          <div class="toggle" onclick="this.classList.toggle('on')">
+            <div class="toggle-track"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Push Notifications</span>
+          </div>
+          <div class="toggle on" onclick="this.classList.toggle('on')">
+            <div class="toggle-track"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Daily Horoscope</span>
+          </div>
+          <div class="toggle disabled">
+            <div class="toggle-track"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Disabled</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       9. BADGES & CHIPS (Atoms)
+       ============================================================ -->
+  <section class="ds-section" id="badges-chips">
+    <h2 class="ds-section-title">Badges & Chips</h2>
+
+    <div class="ds-grid ds-grid-2">
+      <div class="component-card">
+        <div class="component-card-title">Badges</div>
+        <div class="ds-flex">
+          <span class="badge badge-primary">3</span>
+          <span class="badge badge-secondary">12</span>
+          <span class="badge badge-error">99+</span>
+          <span class="badge badge-primary badge-dot"></span>
+          <span class="badge badge-error badge-dot"></span>
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-card-title">Chips</div>
+        <div class="ds-flex">
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9733; ราศีเมษ</button>
+          <button class="chip selected" onclick="this.classList.toggle('selected')">&#9790; พระจันทร์</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#10024; ดวงความรัก</button>
+          <button class="chip disabled">Disabled</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       10. AVATARS (Atoms)
+       ============================================================ -->
+  <section class="ds-section" id="avatars">
+    <h2 class="ds-section-title">Avatars</h2>
+    <p class="ds-section-desc">Initials-based avatars with cosmic gradient — SM (32), MD (40), LG (56)</p>
+    <div class="ds-flex" style="gap:var(--space-4)">
+      <div class="radius-item"><div class="avatar avatar-sm">MU</div><div class="radius-info">SM 32px</div></div>
+      <div class="radius-item"><div class="avatar avatar-md">DM</div><div class="radius-info">MD 40px</div></div>
+      <div class="radius-item"><div class="avatar avatar-lg">&#9733;</div><div class="radius-info">LG 56px</div></div>
+    </div>
+  </section>
+
+  <!-- Divider demo -->
+  <div class="ds-section">
+    <h2 class="ds-section-title">Divider</h2>
+    <div class="ds-flex-col" style="gap:var(--space-4);max-width:400px">
+      <div class="divider"></div>
+      <span style="font-size:var(--caption-4-size);color:var(--fg-low)">Full-width divider</span>
+      <div class="divider divider-inset"></div>
+      <span style="font-size:var(--caption-4-size);color:var(--fg-low)">Inset divider</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       11. MOLECULES
+       ============================================================ -->
+  <section class="ds-section" id="molecules">
+    <h2 class="ds-section-title">Molecules</h2>
+    <p class="ds-section-desc">Components ที่ประกอบจาก atoms หลายตัว</p>
+
+    <!-- Search Bar -->
+    <div class="component-card ds-subsection" style="max-width:500px">
+      <div class="component-card-title">Search Bar</div>
+      <div class="search-bar">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" placeholder="ค้นหาราศี, ดวง, บทความ...">
+        <button class="clear-btn">&times;</button>
+      </div>
+    </div>
+
+    <!-- List Items -->
+    <div class="component-card ds-subsection" style="max-width:500px">
+      <div class="component-card-title">List Items</div>
+      <div class="list-item">
+        <div class="avatar avatar-md">&#9800;</div>
+        <div class="list-item-content">
+          <div class="list-item-title">ราศีเมษ (Aries)</div>
+          <div class="list-item-subtitle">Mar 21 - Apr 19</div>
+        </div>
+        <div class="list-item-trailing">&#10095;</div>
+      </div>
+      <div class="divider divider-inset"></div>
+      <div class="list-item">
+        <div class="avatar avatar-md">&#9801;</div>
+        <div class="list-item-content">
+          <div class="list-item-title">ราศีพฤษภ (Taurus)</div>
+          <div class="list-item-subtitle">Apr 20 - May 20</div>
+        </div>
+        <div class="list-item-trailing">&#10095;</div>
+      </div>
+      <div class="divider divider-inset"></div>
+      <div class="list-item">
+        <div class="avatar avatar-md">&#9802;</div>
+        <div class="list-item-content">
+          <div class="list-item-title">ราศีเมถุน (Gemini)</div>
+          <div class="list-item-subtitle">May 21 - Jun 20</div>
+        </div>
+        <div class="list-item-trailing">&#10095;</div>
+      </div>
+    </div>
+
+    <!-- Snackbar/Toast -->
+    <div class="component-card ds-subsection">
+      <div class="component-card-title">Snackbar / Toast</div>
+      <div class="ds-flex-col" style="gap:var(--space-3)">
+        <div class="snackbar snackbar-default">บันทึกข้อมูลเรียบร้อย <button class="snackbar-action">Undo</button></div>
+        <div class="snackbar snackbar-success">&#10003; สมัครสมาชิกสำเร็จ!</div>
+        <div class="snackbar snackbar-error">&#10007; เกิดข้อผิดพลาด กรุณาลองใหม่</div>
+        <div class="snackbar snackbar-warning">&#9888; พื้นที่เก็บข้อมูลใกล้เต็ม</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="component-card ds-subsection">
+      <div class="component-card-title">Tabs</div>
+      <div class="tab-bar">
+        <button class="tab-item active" onclick="selectTab(this)">&#9733; ดวงรายวัน</button>
+        <button class="tab-item" onclick="selectTab(this)">&#9790; ดวงรายเดือน</button>
+        <button class="tab-item" onclick="selectTab(this)">&#10024; ความรัก</button>
+        <button class="tab-item" onclick="selectTab(this)">&#128176; การเงิน</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       12. ORGANISMS
+       ============================================================ -->
+  <section class="ds-section" id="organisms">
+    <h2 class="ds-section-title">Organisms</h2>
+    <p class="ds-section-desc">Complex components ที่ใช้ใน layout จริง</p>
+
+    <!-- Top App Bar -->
+    <div class="component-card ds-subsection">
+      <div class="component-card-title">Top App Bar</div>
+      <div class="app-bar">
+        <button class="btn-icon btn-icon-standard">&#9776;</button>
+        <span class="app-bar-title">DailyMu</span>
+        <div class="app-bar-actions">
+          <button class="btn-icon btn-icon-standard">&#128269;</button>
+          <button class="btn-icon btn-icon-standard" style="position:relative">
+            &#128276;
+            <span class="badge badge-error badge-dot" style="position:absolute;top:6px;right:6px"></span>
+          </button>
+          <div class="avatar avatar-sm">MU</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="component-card ds-subsection" style="max-width:420px">
+      <div class="component-card-title">Bottom Navigation</div>
+      <div class="bottom-nav">
+        <button class="bottom-nav-item active" onclick="selectBottomNav(this)"><span class="nav-icon">&#127968;</span>Home</button>
+        <button class="bottom-nav-item" onclick="selectBottomNav(this)"><span class="nav-icon">&#9733;</span>Horoscope</button>
+        <button class="bottom-nav-item" onclick="selectBottomNav(this)"><span class="nav-icon">&#9790;</span>Moon</button>
+        <button class="bottom-nav-item" onclick="selectBottomNav(this)"><span class="nav-icon">&#128100;</span>Profile</button>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="ds-subsection">
+      <div class="component-card-title" style="font-size:var(--label-3-size);font-weight:700;color:var(--primary);margin-bottom:var(--space-4);display:flex;align-items:center;gap:var(--space-2)"><span style="width:4px;height:16px;background:var(--primary);border-radius:2px;display:inline-block"></span>Cards</div>
+      <div class="ds-grid ds-grid-3">
+        <div class="card">
+          <div class="card-image">&#9733;</div>
+          <div class="card-body">
+            <div class="card-title">ดวงรายวัน</div>
+            <div class="card-desc">เช็คดวงชะตาประจำวันจาก AI วิเคราะห์ตำแหน่งดาวเคราะห์แบบเรียลไทม์</div>
+            <div class="card-actions">
+              <button class="btn btn-filled-primary btn-sm">ดูดวง</button>
+              <button class="btn btn-ghost btn-sm">&#9829;</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background:var(--secondary-bg-subtle)">&#9790;</div>
+          <div class="card-body">
+            <div class="card-title">Moon Phase</div>
+            <div class="card-desc">ติดตามเฟสพระจันทร์และผลกระทบต่ออารมณ์ความรู้สึก</div>
+            <div class="card-actions">
+              <button class="btn btn-filled-secondary btn-sm">สำรวจ</button>
+              <button class="btn btn-ghost btn-sm">&#9829;</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background:linear-gradient(135deg, var(--primary-bg-subtle), var(--secondary-bg-subtle))">&#10024;</div>
+          <div class="card-body">
+            <div class="card-title">Premium Plan</div>
+            <div class="card-desc">ปลดล็อกดวงเชิงลึก, AI coaching, และ daily ritual แนะนำ</div>
+            <div class="card-actions">
+              <button class="btn btn-tonal-primary btn-sm">สมัครเลย</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dialog -->
+    <div class="component-card ds-subsection">
+      <div class="component-card-title">Dialog / Modal</div>
+      <div class="dialog-overlay">
+        <div class="dialog">
+          <div class="dialog-title">ยืนยันการสมัครสมาชิก</div>
+          <div class="dialog-body">คุณต้องการสมัคร Premium Plan ราคา ฿299/เดือน หรือไม่? จะเริ่มเรียกเก็บเงินทันที</div>
+          <div class="dialog-actions">
+            <button class="btn btn-ghost btn-md">ยกเลิก</button>
+            <button class="btn btn-filled-primary btn-md">ยืนยัน</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Sheet -->
+    <div class="component-card ds-subsection" style="max-width:420px">
+      <div class="component-card-title">Bottom Sheet</div>
+      <div class="bottom-sheet">
+        <div class="bottom-sheet-handle"></div>
+        <div class="bottom-sheet-title">เลือกราศีของคุณ</div>
+        <div class="ds-flex" style="gap:var(--space-2);flex-wrap:wrap">
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9800; เมษ</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9801; พฤษภ</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9802; เมถุน</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9803; กรกฎ</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9804; สิงห์</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9805; กันย์</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9806; ตุลย์</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9807; พิจิก</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9808; ธนู</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9809; มังกร</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9810; กุมภ์</button>
+          <button class="chip" onclick="this.classList.toggle('selected')">&#9811; มีน</button>
+        </div>
+        <div style="margin-top:var(--space-4)">
+          <button class="btn btn-filled-primary btn-md" style="width:100%">ยืนยัน</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Example -->
+    <div class="component-card ds-subsection" style="max-width:420px">
+      <div class="component-card-title">Form (Composite)</div>
+      <div class="form-field">
+        <div class="text-field">
+          <label class="text-field-label">ชื่อ-นามสกุล</label>
+          <input class="text-field-input" type="text" placeholder="กรอกชื่อ-นามสกุล">
+        </div>
+        <div class="text-field">
+          <label class="text-field-label">วันเกิด</label>
+          <input class="text-field-input" type="date">
+        </div>
+        <div class="text-field">
+          <label class="text-field-label">เวลาเกิด (ถ้าทราบ)</label>
+          <input class="text-field-input" type="time">
+          <span class="text-field-helper">เวลาเกิดช่วยให้ดวงแม่นยำขึ้น</span>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="btn btn-ghost btn-md" style="flex:1">ยกเลิก</button>
+          <button class="btn btn-filled-primary btn-md" style="flex:1">บันทึก</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer style="text-align:center;padding:var(--space-10) 0 var(--space-6);color:var(--fg-low);font-size:var(--caption-4-size)">
+    DailyMu (Muniverse) Design System &mdash; v1.0 &mdash; LINE Seed Sans TH &mdash; Light + Dark Mode
+  </footer>
+
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT (Vanilla)
+     ============================================================ -->
+<script>
+// Theme Toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeIcon').textContent = next === 'dark' ? '\u263E' : '\u2600';
+  document.getElementById('themeLabel').textContent = next === 'dark' ? 'Dark' : 'Light';
+}
+
+// Radio selection
+function selectRadio(el) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.radio').forEach(r => r.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// Tab selection
+function selectTab(el) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Bottom nav selection
+function selectBottomNav(el) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.bottom-nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
