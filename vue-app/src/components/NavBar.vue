@@ -5,6 +5,7 @@ const navigate = inject('navigate')
 const currentPage = inject('currentPage')
 
 const activeSection = ref('home')
+const showInfoBar = ref(true)
 
 function scrollTo(id) {
   if (currentPage.value !== 'home') {
@@ -69,19 +70,24 @@ watch(currentPage, () => {
 
 <template>
   <!-- Info bar — marquee -->
-  <div class="info-bar">
-    <div class="marquee">
-      <div class="marquee-content">
-        <span>&#127881; DailyMu V1.5 — ระบบ Subscription ใหม่ Free / Plus ฿99 / Premium ฿299 พร้อมให้บริการแล้ว &#127881;</span>
-        <span>&#10024; ดูดวงฮีลใจ ผสาน Thai Astrology + AI — ดาวน์โหลดฟรีวันนี้ &#10024;</span>
-        <span>&#127881; DailyMu V1.5 — ระบบ Subscription ใหม่ Free / Plus ฿99 / Premium ฿299 พร้อมให้บริการแล้ว &#127881;</span>
-        <span>&#10024; ดูดวงฮีลใจ ผสาน Thai Astrology + AI — ดาวน์โหลดฟรีวันนี้ &#10024;</span>
+  <transition name="slide-info">
+    <div v-if="showInfoBar" class="info-bar">
+      <div class="marquee">
+        <div class="marquee-content">
+          <span>&#127881; DailyMu V1.5 — ระบบ Subscription ใหม่ Free / Plus ฿99 / Premium ฿299 พร้อมให้บริการแล้ว &#127881;</span>
+          <span>&#10024; ดูดวงฮีลใจ ผสาน Thai Astrology + AI — ดาวน์โหลดฟรีวันนี้ &#10024;</span>
+          <span>&#127881; DailyMu V1.5 — ระบบ Subscription ใหม่ Free / Plus ฿99 / Premium ฿299 พร้อมให้บริการแล้ว &#127881;</span>
+          <span>&#10024; ดูดวงฮีลใจ ผสาน Thai Astrology + AI — ดาวน์โหลดฟรีวันนี้ &#10024;</span>
+        </div>
       </div>
+      <button class="info-close" @click="showInfoBar = false" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
-  </div>
+  </transition>
 
   <!-- Navbar -->
-  <nav class="navbar">
+  <nav class="navbar" :style="{ top: showInfoBar ? '36px' : '0' }">
     <div class="container navbar-inner">
       <!-- Left: Menu links -->
       <div class="navbar-left">
@@ -113,8 +119,8 @@ watch(currentPage, () => {
    INFO BAR — Marquee
    ============================================================ */
 .info-bar {
-  background: var(--gray-700);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #FDEEF5 0%, #F1F2FF 50%, #E6F6FC 100%);
+  color: #6A6E83;
   font-size: var(--caption-4-size);
   font-weight: 400;
   height: 36px;
@@ -124,6 +130,35 @@ watch(currentPage, () => {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: calc(var(--z-sticky) + 1);
+}
+.info-close {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  color: var(--fg-mid);
+  font-size: 12px;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms;
+}
+.info-close:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--fg-high);
+}
+.slide-info-leave-active {
+  transition: height 300ms var(--spring-smooth), opacity 200ms;
+}
+.slide-info-leave-to {
+  height: 0;
+  opacity: 0;
 }
 .marquee {
   width: 100%;
@@ -150,6 +185,7 @@ watch(currentPage, () => {
 .navbar {
   position: fixed;
   top: 36px;
+  transition: top 300ms var(--spring-smooth);
   left: 0; right: 0;
   z-index: var(--z-sticky);
   background: var(--bg-elevated);
