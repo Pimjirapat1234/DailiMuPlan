@@ -6,6 +6,13 @@ const currentPage = inject('currentPage')
 
 const activeSection = ref('home')
 const showInfoBar = ref(true)
+const mobileMenuOpen = ref(false)
+
+function mobileNavigate(action, arg) {
+  mobileMenuOpen.value = false
+  if (action === 'navigate') navigate(arg)
+  else if (action === 'scroll') scrollTo(arg)
+}
 
 function scrollTo(id) {
   if (currentPage.value !== 'home') {
@@ -110,7 +117,25 @@ watch(currentPage, () => {
           <i class="fa-brands fa-google-play"></i> Google Play
         </a>
       </div>
+
+      <!-- Mobile: Hamburger button -->
+      <button class="hamburger" @click="mobileMenuOpen = !mobileMenuOpen" aria-label="Menu">
+        <i :class="mobileMenuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"></i>
+      </button>
     </div>
+
+    <!-- Mobile menu dropdown -->
+    <transition name="slide-menu">
+      <div v-if="mobileMenuOpen" class="mobile-menu">
+        <button class="mobile-link" :class="{ active: currentPage === 'home' && activeSection === 'home' }" @click="mobileNavigate('navigate', 'home')">Home</button>
+        <a href="#features" class="mobile-link" :class="{ active: currentPage === 'home' && activeSection === 'features' }" @click.prevent="mobileNavigate('scroll', 'features')">Features</a>
+        <a href="#pricing" class="mobile-link" :class="{ active: currentPage === 'home' && activeSection === 'pricing' }" @click.prevent="mobileNavigate('scroll', 'pricing')">Pricing</a>
+        <div class="mobile-stores">
+          <a href="#" class="store-pill store-ios"><i class="fa-brands fa-apple"></i> App Store</a>
+          <a href="#" class="store-pill store-android"><i class="fa-brands fa-google-play"></i> Google Play</a>
+        </div>
+      </div>
+    </transition>
   </nav>
 </template>
 
@@ -279,12 +304,77 @@ watch(currentPage, () => {
   font-size: 16px;
 }
 
+/* Hamburger — hidden on desktop */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--fg-high);
+  cursor: pointer;
+  padding: var(--space-2);
+  transition: color 200ms;
+}
+.hamburger:hover { color: var(--primary); }
+
+/* Mobile menu dropdown */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  padding: var(--space-4) var(--space-6) var(--space-6);
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-default);
+}
+.mobile-link {
+  font-family: var(--font-family-primary);
+  font-size: var(--label-2-size);
+  font-weight: 700;
+  color: var(--fg-mid);
+  text-decoration: none;
+  padding: var(--space-3) 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  transition: color 200ms;
+}
+.mobile-link:hover,
+.mobile-link.active { color: var(--primary); }
+.mobile-stores {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+/* Slide transition */
+.slide-menu-enter-active {
+  transition: max-height 300ms var(--spring-smooth), opacity 200ms;
+}
+.slide-menu-leave-active {
+  transition: max-height 200ms ease, opacity 150ms;
+}
+.slide-menu-enter-from,
+.slide-menu-leave-to {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+.slide-menu-enter-to {
+  max-height: 300px;
+  opacity: 1;
+}
+
 @media (max-width: 767px) {
   .navbar-left { display: none; }
+  .navbar-right { display: none; }
+  .hamburger { display: block; }
+  .mobile-menu { display: flex; }
   .navbar-brand {
     position: static;
     transform: none;
   }
-  .store-pill span { display: none; }
+  .navbar-inner {
+    height: 56px;
+  }
 }
 </style>
