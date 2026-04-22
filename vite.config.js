@@ -6,7 +6,6 @@ export default defineConfig({
   plugins: [vue()],
   base: '/DailiMuPlan/',
   build: {
-    outDir: '../',
-    emptyOutDir: false,
+    outDir: 'dist',
   },
 })
