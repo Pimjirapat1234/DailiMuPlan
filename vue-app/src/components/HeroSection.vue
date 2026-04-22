@@ -254,19 +254,19 @@
   transform: rotate(-22deg);
 }
 .snippet-2 {
-  top: 24%;
+  top: 18%;
   right: 3%;
   transform: rotate(18deg);
 }
 .snippet-3 {
-  bottom: 44%;
-  right: 7%;
+  bottom: 34%;
+  right: 1%;
   transform: rotate(-15deg);
 }
 
 .snippet-4 {
   bottom: 44%;
-  left: 18%;
+  left: 2%;
   transform: rotate(5deg);
 }
 .snippet-4 .snippet-float-wrap { animation-duration: 4.2s; animation-delay: 1.5s; }

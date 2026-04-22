@@ -193,6 +193,42 @@ onUnmounted(() => {
 }
 
 @media (max-width: 767px) {
-  .steps-row { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  .how-section {
+    padding: var(--space-12) 0;
+  }
+  .how-title {
+    font-size: 28px;
+  }
+  .how-header {
+    margin-bottom: var(--space-8);
+  }
+  .steps-row {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin: 0 auto;
+    gap: var(--space-4);
+  }
+  .step-card {
+    padding: var(--space-6) var(--space-5);
+  }
+  .step-num-wrap {
+    height: 52px;
+    margin-bottom: var(--space-4);
+  }
+  .digit-slot {
+    width: 28px;
+    height: 52px;
+  }
+  .digit-reel span {
+    height: 52px;
+    font-size: 44px;
+  }
+  @keyframes reelSpin {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(calc(var(--target) * -52px)); }
+  }
+  .step-title {
+    font-size: var(--label-1-size);
+  }
 }
 </style>

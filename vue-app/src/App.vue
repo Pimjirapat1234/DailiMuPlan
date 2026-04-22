@@ -8,6 +8,7 @@ import ShowcaseSection from './components/ShowcaseSection.vue'
 import DownloadSection from './components/DownloadSection.vue'
 import FooterSection from './components/FooterSection.vue'
 import PricingPage from './components/PricingPage.vue'
+import TestimonialsSection from './components/TestimonialsSection.vue'
 
 const currentPage = ref('home')
 
@@ -42,6 +43,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     <HowItWorksSection />
     <ShowcaseSection />
     <PricingPage />
+    <TestimonialsSection />
     <DownloadSection />
   </template>
 

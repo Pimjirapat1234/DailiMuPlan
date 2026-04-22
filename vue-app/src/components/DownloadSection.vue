@@ -121,9 +121,33 @@
   margin-bottom: var(--space-8);
 }
 @media (max-width: 767px) {
+  .download-section {
+    padding: var(--space-12) 0;
+  }
+  .dl-title {
+    font-size: 28px;
+  }
+  .dl-logo {
+    height: 32px;
+  }
+  .dl-desc {
+    font-size: var(--caption-3-size);
+    margin-bottom: var(--space-6);
+  }
   .store-row {
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-3);
+  }
+  .store-btn {
+    padding: var(--space-3) var(--space-5) var(--space-3) var(--space-3);
+  }
+  .store-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+  .store-name {
+    font-size: var(--label-3-size);
   }
 }
 .store-text { display: flex; flex-direction: column; }

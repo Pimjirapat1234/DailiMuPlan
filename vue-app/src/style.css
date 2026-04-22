@@ -199,7 +199,7 @@
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--font-family-primary);
@@ -211,7 +211,10 @@ body {
   transition: background var(--duration-normal) var(--easing-default),
               color var(--duration-normal) var(--easing-default);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
+
+#app { overflow-x: hidden; width: 100%; }
 
 a { text-decoration: none; color: inherit; }
 

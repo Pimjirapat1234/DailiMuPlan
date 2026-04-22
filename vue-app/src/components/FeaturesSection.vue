@@ -196,7 +196,32 @@ function resetTilt(e) {
 }
 
 @media (max-width: 767px) {
-  .features-grid { grid-template-columns: 1fr 1fr; }
+  .features-section {
+    padding: var(--space-12) 0;
+  }
+  .features-title {
+    font-size: 28px;
+  }
+  .features-header {
+    margin-bottom: var(--space-8);
+  }
+  .features-grid { grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+  .feat-card {
+    padding: var(--space-5) var(--space-4);
+  }
+  .feat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    margin-bottom: var(--space-3);
+  }
+  .feat-title {
+    font-size: var(--label-3-size);
+    margin-bottom: var(--space-1);
+  }
+  .feat-desc {
+    font-size: var(--caption-4-size);
+  }
 }
 @media (max-width: 479px) {
   .features-grid { grid-template-columns: 1fr; }

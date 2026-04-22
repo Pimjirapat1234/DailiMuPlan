@@ -1,5 +1,17 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref, computed, watch, nextTick } from 'vue'
+
+const billing = ref('monthly')
+const priceKey = ref(0)
+
+watch(billing, () => { priceKey.value++ })
+
+const prices = computed(() => {
+  if (billing.value === 'monthly') {
+    return { plus: '฿149', plusPer: '/ เดือน', premium: '฿349', premiumPer: '/ เดือน' }
+  }
+  return { plus: '฿1,390', plusPer: '/ ปี', premium: '฿3,290', premiumPer: '/ ปี' }
+})
 
 const faqs = reactive([
   { q: 'สมัครสมาชิกแล้วยกเลิกได้ไหม?', a: 'ได้เลย สามารถยกเลิกได้ตลอดเวลาผ่านหน้าเว็บจัดการสมาชิก โดยจะยังใช้งานได้จนครบรอบบิลปัจจุบัน', open: false },
@@ -26,6 +38,21 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
     <!-- Plans container -->
     <section v-reveal="'up'" class="plans-section">
       <div class="container">
+        <div class="plans-header">
+          <div></div>
+          <div class="billing-toggle">
+            <button
+              class="toggle-btn"
+              :class="{ active: billing === 'monthly' }"
+              @click="billing = 'monthly'"
+            >รายเดือน</button>
+            <button
+              class="toggle-btn"
+              :class="{ active: billing === 'yearly' }"
+              @click="billing = 'yearly'"
+            >รายปี</button>
+          </div>
+        </div>
         <div class="plans-box sr-child">
 
           <!-- FREE -->
@@ -62,14 +89,19 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
             </div>
           </div>
 
-          <!-- PLUS -->
-          <div class="plan-col col-border">
+          <!-- PLUS — Recommended -->
+          <div class="plan-col col-border col-recommended">
+            <div class="recommended-badge"><i class="fa-solid fa-crown"></i> แนะนำ</div>
             <div class="plan-top">
               <p class="plan-name"><i class="fa-solid fa-wand-magic-sparkles plan-name-icon"></i> DailyMu Plus</p>
 
-              <div class="plan-price-row">
-                <span class="plan-price">฿149</span>
-                <span class="plan-per">/ เดือน</span>
+              <div class="plan-price-row price-animated">
+                <transition name="price-slide" mode="out-in">
+                  <span class="plan-price" :key="prices.plus">{{ prices.plus }}</span>
+                </transition>
+                <transition name="price-slide" mode="out-in">
+                  <span class="plan-per" :key="prices.plusPer">{{ prices.plusPer }}</span>
+                </transition>
               </div>
               <p class="plan-desc">ครบ 2 ศาสตร์ ไทย + ปาจื่อ ไม่มีโฆษณา</p>
 
@@ -77,26 +109,17 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
 
             <div class="plan-divider"></div>
 
-            <div class="plan-features">
-              <div class="feat-group">
-                <h4 class="feat-heading">ดูดวง</h4>
-                <p>ดูดวงรายวัน + สีมงคล</p>
-                <p>Calendar ย้อนหลัง 14 วัน</p>
-                <p>โปรไฟล์ 2 คน</p>
-                <p>ไทย + ปาจื่อ ครบทั้งคู่</p>
-              </div>
-              <div class="feat-group">
-                <h4 class="feat-heading">Fortune Engines</h4>
-                <p>เซียมซี 3 ครั้ง/วัน</p>
-                <p>ไพ่ทาโรต์ 2 ครั้ง/วัน</p>
-                <p>ทำนายฝัน 5 ครั้ง/วัน</p>
-              </div>
-              <div class="feat-group">
-                <h4 class="feat-heading">อื่นๆ</h4>
-                <p>ไม่มีโฆษณา</p>
-                <p>แชร์ 5 ครั้ง/วัน</p>
-              </div>
+            <div class="plan-features plan-features-check">
+              <div class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>โปรไฟล์: <strong>2 คน</strong></span></div>
+              <div class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>โหราศาสตร์: <strong>ไทย + ปาจื่อ ครบ</strong></span></div>
+              <div class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>เซียมซี: <strong>3 ครั้ง/วัน</strong></span></div>
+              <div class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>ไพ่ทาโรต์: <strong>2 ครั้ง/วัน</strong></span></div>
+              <div class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>ทำนายฝัน: <strong>5 ครั้ง/วัน</strong></span></div>
+              <div class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>Calendar ย้อนหลัง: <strong>14 วัน</strong></span></div>
+              <div class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>แชร์ผลดวง: <strong>5 ครั้ง/วัน</strong></span></div>
+              <div class="check-item"><i class="fa-solid fa-circle-check check-icon"></i><span>ไม่มีโฆษณา: <strong>✓</strong></span></div>
             </div>
+
           </div>
 
           <!-- PREMIUM -->
@@ -104,9 +127,13 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
             <div class="plan-top">
               <p class="plan-name"><i class="fa-solid fa-gem plan-name-icon"></i> DailyMu Premium</p>
 
-              <div class="plan-price-row">
-                <span class="plan-price">฿349</span>
-                <span class="plan-per">/ เดือน</span>
+              <div class="plan-price-row price-animated">
+                <transition name="price-slide" mode="out-in">
+                  <span class="plan-price" :key="prices.premium">{{ prices.premium }}</span>
+                </transition>
+                <transition name="price-slide" mode="out-in">
+                  <span class="plan-per" :key="prices.premiumPer">{{ prices.premiumPer }}</span>
+                </transition>
               </div>
               <p class="plan-desc">ปลดล็อคทุกฟีเจอร์ ทั้ง 2 ศาสตร์ไม่จำกัด พร้อม AI</p>
 
@@ -215,6 +242,47 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
   line-height: 1.5;
 }
 
+/* Plans header — toggle on right */
+.plans-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: var(--space-6);
+}
+
+/* Billing toggle */
+.billing-toggle {
+  display: inline-flex;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  margin-top: var(--space-6);
+}
+[data-theme="dark"] .billing-toggle {
+  background: var(--bg-card);
+}
+.toggle-btn {
+  font-family: var(--font-family-primary);
+  font-size: var(--label-4-size);
+  font-weight: 700;
+  padding: 8px 24px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--fg-mid);
+  cursor: pointer;
+  transition: all 300ms var(--spring-bounce);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.toggle-btn.active {
+  background: linear-gradient(135deg, var(--pink-400) 0%, var(--violet-400) 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(236,89,157,0.3);
+}
+
 /* ============================================================
    PLANS BOX — single container, 3 columns, vertical dividers
    ============================================================ */
@@ -316,11 +384,68 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
   transform: translateY(-1px);
 }
 
+/* Recommended column */
+.col-recommended {
+  background: linear-gradient(180deg, var(--pink-50) 0%, var(--violet-50) 100%);
+  position: relative;
+  border-radius: var(--radius-xl);
+  transform: scale(1.03);
+  box-shadow: 0 8px 32px rgba(236,89,157,0.12);
+  z-index: 1;
+  border: 2px solid #FFFFFF;
+}
+[data-theme="dark"] .col-recommended {
+  background: linear-gradient(180deg, rgba(236,89,157,0.1) 0%, rgba(114,121,251,0.1) 100%);
+}
+.recommended-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--pink-400) 0%, var(--violet-400) 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 18px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(236,89,157,0.3);
+}
+.recommended-badge i {
+  font-size: 12px;
+}
+
+/* Check-style feature list */
+.plan-features-check {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--caption-3-size);
+  line-height: 1.5;
+  color: var(--fg-high);
+}
+.check-icon {
+  color: var(--primary);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
 /* Divider between top and features */
 .plan-divider {
   height: 1px;
   background: var(--border-default);
   margin: var(--space-8) 0;
+}
+.col-recommended .plan-divider {
+  background: #FFFFFF;
 }
 
 /* Feature groups */
@@ -412,10 +537,43 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
 }
 
 /* ============================================================
+   PRICE SLIDE ANIMATION
+   ============================================================ */
+.price-animated {
+  overflow: hidden;
+}
+.price-slide-enter-active {
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1), opacity 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.price-slide-leave-active {
+  transition: transform 350ms cubic-bezier(0.4, 0, 1, 1), opacity 250ms cubic-bezier(0.4, 0, 1, 1);
+}
+.price-slide-enter-from {
+  transform: translateY(60%);
+  opacity: 0;
+}
+.price-slide-leave-to {
+  transform: translateY(-40%);
+  opacity: 0;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 767px) {
-  .pricing-h1 { font-size: 36px; }
+  .pricing-hero {
+    padding: var(--space-12) 0 var(--space-6);
+  }
+  .pricing-h1 { font-size: 28px; }
+  .pricing-sub { font-size: var(--caption-3-size); }
+  .plans-header {
+    justify-content: center;
+    margin-bottom: var(--space-4);
+  }
+  .toggle-btn {
+    font-size: var(--label-5-size);
+    padding: 6px 16px;
+  }
   .plans-box {
     grid-template-columns: 1fr;
   }
@@ -423,8 +581,25 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
     border-left: none;
     border-top: 1px solid var(--border-default);
   }
+  .col-recommended {
+    transform: scale(1);
+    border-top: none;
+    order: -1;
+  }
   .plan-col {
     padding: var(--space-8) var(--space-6);
+  }
+  .plan-price {
+    font-size: 32px;
+  }
+  .faq-section {
+    padding: var(--space-8) 0 var(--space-12);
+  }
+  .faq-title {
+    font-size: var(--heading-5-size);
+  }
+  .faq-q {
+    font-size: var(--label-4-size);
   }
 }
 </style>

@@ -330,18 +330,35 @@ onUnmounted(() => {
 
 /* Responsive */
 @media (max-width: 767px) {
+  .showcase-section {
+    padding: var(--space-12) 0;
+  }
+  .showcase-headline {
+    font-size: 28px;
+    margin-bottom: var(--space-10);
+  }
   .showcase-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-10);
+    gap: var(--space-8);
   }
   .showcase-visual {
     order: -1;
   }
+  .showcase-visual::before {
+    width: 280px;
+    height: 280px;
+  }
   .phone-frame {
-    width: 220px;
+    width: 200px;
+  }
+  .accordion-num {
+    font-size: var(--heading-5-size);
   }
   .accordion-title {
-    font-size: 18px;
+    font-size: 16px;
+  }
+  .accordion-item {
+    padding: var(--space-4) 0;
   }
 }
 </style>

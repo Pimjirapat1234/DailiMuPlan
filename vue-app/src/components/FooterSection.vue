@@ -75,7 +75,9 @@ const navigate = inject('navigate')
 }
 .footer-logo {
   height: 32px;
-  width: fit-content;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
   margin-bottom: var(--space-5);
 }
 .footer-tagline {
@@ -165,12 +167,21 @@ const navigate = inject('navigate')
 }
 
 @media (max-width: 767px) {
+  .footer {
+    padding: var(--space-10) 0 var(--space-6);
+  }
   .footer-top {
     flex-direction: column;
-    gap: var(--space-8);
+    gap: var(--space-6);
+  }
+  .footer-logo {
+    height: 28px;
+  }
+  .footer-tagline {
+    font-size: var(--caption-4-size);
   }
   .footer-links-grid {
-    gap: var(--space-10);
+    gap: var(--space-8);
   }
   .footer-bottom {
     flex-direction: column;
