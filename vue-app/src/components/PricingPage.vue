@@ -571,8 +571,8 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
     margin-bottom: var(--space-4);
   }
   .toggle-btn {
-    font-size: var(--label-5-size);
-    padding: 6px 16px;
+    font-size: var(--label-4-size);
+    padding: 8px 20px;
   }
   .plans-box {
     grid-template-columns: 1fr;
