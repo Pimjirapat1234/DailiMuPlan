@@ -10,7 +10,7 @@ const navigate = inject('navigate')
       <div class="footer-top">
         <!-- Brand -->
         <div class="footer-brand">
-          <img :src="`${base}logo.png`" alt="DailyMu" class="footer-logo" />
+          <img :src="`${base}images/logos/logo.png`" alt="DailyMu" class="footer-logo" />
           <p class="footer-tagline">เพื่อนฮีลใจ ดูดวงด้วย AI — เช็คดวง สีมงคล เปิดไพ่<br>ทำนายฝัน ครบในแอปเดียว ทุกคำทำนายอ่านแล้วรู้สึกดี</p>
           <div class="footer-social">
             <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>

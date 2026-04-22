@@ -25,9 +25,9 @@ const base = import.meta.env.BASE_URL
 
       <!-- Floating screenshots — 3 phones -->
       <div class="hero-phones sr-child">
-        <img :src="`${base}screen-calendar.png`" alt="DailyMu ปฏิทิน" class="phone phone-side-left float-slow" />
-        <img :src="`${base}screen-home.png`" alt="DailyMu หน้าหลัก" class="phone phone-center float" />
-        <img :src="`${base}screen-tarot.png`" alt="DailyMu ไพ่ทาโรต์" class="phone phone-side-right float-slow" />
+        <img :src="`${base}images/screens/screen-calendar.png`" alt="DailyMu ปฏิทิน" class="phone phone-side-left float-slow" />
+        <img :src="`${base}images/screens/screen-home.png`" alt="DailyMu หน้าหลัก" class="phone phone-center float" />
+        <img :src="`${base}images/screens/screen-tarot.png`" alt="DailyMu ไพ่ทาโรต์" class="phone phone-side-right float-slow" />
       </div>
 
       <!-- Floating snippet cards — Gleap exact style -->
@@ -37,7 +37,7 @@ const base = import.meta.env.BASE_URL
             <span class="snippet-tag tag-pink">ดวงรายวัน</span>
             <p class="snippet-text">วันนี้ดวงดี เหมาะเริ่มต้นสิ่งใหม่</p>
           </div>
-          <img class="snippet-avatar" :src="`${base}avatar-3.png`" alt="" />
+          <img class="snippet-avatar" :src="`${base}images/avatars/avatar-3.png`" alt="" />
         </div>
       </div>
 
@@ -47,7 +47,7 @@ const base = import.meta.env.BASE_URL
             <span class="snippet-tag tag-violet">AI ตีความ</span>
             <p class="snippet-text">พลังงานวันนี้ดีมาก ลุยได้เลย!</p>
           </div>
-          <img class="snippet-avatar" :src="`${base}avatar-2.png`" alt="" />
+          <img class="snippet-avatar" :src="`${base}images/avatars/avatar-2.png`" alt="" />
         </div>
       </div>
 
@@ -57,7 +57,7 @@ const base = import.meta.env.BASE_URL
             <span class="snippet-tag tag-green">สีมงคล</span>
             <p class="snippet-text">สีเขียวอ่อน ช่วยเสริมความสงบ</p>
           </div>
-          <img class="snippet-avatar" :src="`${base}avatar-1.png`" alt="" />
+          <img class="snippet-avatar" :src="`${base}images/avatars/avatar-1.png`" alt="" />
         </div>
       </div>
 
@@ -68,7 +68,7 @@ const base = import.meta.env.BASE_URL
             <span class="snippet-tag tag-pink">ไพ่ทาโรต์</span>
             <p class="snippet-text">การงานวันนี้เปิดรับสิ่งใหม่</p>
           </div>
-          <img class="snippet-avatar" :src="`${base}avatar-2.png`" alt="" />
+          <img class="snippet-avatar" :src="`${base}images/avatars/avatar-2.png`" alt="" />
         </div>
       </div>
 

@@ -7,25 +7,25 @@ const features = [
   {
     title: 'ดูดวงรายวัน',
     desc: 'AI สรุปดวงประจำสัปดาห์ สีมงคลวันนี้ คำทำนายเชิงบวกที่อ่านแล้วรู้สึกดี ไม่ทำให้กังวล',
-    image: `${base}screen-home.png`,
+    image: `${base}images/screens/screen-home.png`,
     color: '#F4A0C4'
   },
   {
     title: 'ปฏิทินดวง',
     desc: 'ดูดวงย้อนหลังและล่วงหน้าผ่านปฏิทิน เห็นวันดี-วันระวัง ได้ในมุมมองเดียว วางแผนชีวิตง่ายขึ้น',
-    image: `${base}screen-calendar-2.png`,
+    image: `${base}images/screens/screen-calendar-2.png`,
     color: '#A8B4FB'
   },
   {
     title: 'เซียมซีออนไลน์',
     desc: 'ตั้งสมาธิ เขย่า แล้วดูดวงของคุณ เซียมซีดิจิทัลที่ตีความด้วย AI อ่านง่าย เข้าใจทันที',
-    image: `${base}screen-siamsi.png`,
+    image: `${base}images/screens/screen-siamsi.png`,
     color: '#8DD4E8'
   },
   {
     title: 'ไพ่ทาโรต์',
     desc: 'เปิดไพ่ 3 ใบ สำรวจคำแนะนำด้านการงาน การเงิน ความรัก ตีความอย่างมีเหตุผลด้วย AI',
-    image: `${base}screen-tarot-3.png`,
+    image: `${base}images/screens/screen-tarot-3.png`,
     color: '#C4A8FB'
   }
 ]

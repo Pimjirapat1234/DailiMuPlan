@@ -12,7 +12,7 @@ const base = import.meta.env.BASE_URL
 
           <h2 class="dl-title sr-child">
             ดาวน์โหลด
-            <img :src="`${base}logo.png`" alt="DailyMu" class="dl-logo" /><br>
+            <img :src="`${base}images/logos/logo.png`" alt="DailyMu" class="dl-logo" /><br>
             ได้ทั้ง iOS และ Android
           </h2>
 
@@ -29,7 +29,7 @@ const base = import.meta.env.BASE_URL
               </div>
             </a>
             <a href="#" class="store-btn">
-              <span class="store-icon"><img :src="`${base}google-play-icon.png`" alt="Google Play" class="store-icon-img" /></span>
+              <span class="store-icon"><img :src="`${base}images/icons/google-play-icon.png`" alt="Google Play" class="store-icon-img" /></span>
               <div class="store-text">
                 <span class="store-label">GET IT ON</span>
                 <span class="store-name">Google Play</span>

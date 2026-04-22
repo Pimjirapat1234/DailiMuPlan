@@ -88,7 +88,7 @@ watch(currentPage, () => {
 
       <!-- Center: Logo -->
       <a href="#" class="navbar-brand" @click.prevent="navigate('home')">
-        <img :src="`${base}logo.png`" alt="DailyMu" class="navbar-logo" />
+        <img :src="`${base}images/logos/logo.png`" alt="DailyMu" class="navbar-logo" />
       </a>
 
       <!-- Right: Store buttons -->
