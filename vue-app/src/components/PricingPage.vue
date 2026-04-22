@@ -567,7 +567,7 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
   .pricing-h1 { font-size: 28px; }
   .pricing-sub { font-size: var(--caption-3-size); }
   .plans-header {
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom: var(--space-4);
   }
   .toggle-btn {
@@ -585,6 +585,7 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
     transform: scale(1);
     border-top: none;
     order: -1;
+    margin-top: var(--space-4);
   }
   .plan-col {
     padding: var(--space-8) var(--space-6);
