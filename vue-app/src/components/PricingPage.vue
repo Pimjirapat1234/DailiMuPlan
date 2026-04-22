@@ -567,7 +567,7 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
   .pricing-h1 { font-size: 28px; }
   .pricing-sub { font-size: var(--caption-3-size); }
   .plans-header {
-    justify-content: flex-start;
+    justify-content: flex-end;
     margin-bottom: var(--space-4);
   }
   .toggle-btn {
