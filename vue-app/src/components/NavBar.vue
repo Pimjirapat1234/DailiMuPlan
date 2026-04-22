@@ -81,9 +81,9 @@ watch(currentPage, () => {
     <div v-if="showInfoBar" class="info-bar">
       <div class="marquee">
         <div class="marquee-content">
-          <span>&#127881; DailyMu V1.5 — ระบบ Subscription ใหม่ Free / Plus ฿99 / Premium ฿299 พร้อมให้บริการแล้ว &#127881;</span>
+          <span>&#127881; DailyMu V1.5 — ระบบ Subscription ใหม่ Free / Plus ฿149 / Premium ฿349 พร้อมให้บริการแล้ว &#127881;</span>
           <span>&#10024; ดูดวงฮีลใจ ผสาน Thai Astrology + AI — ดาวน์โหลดฟรีวันนี้ &#10024;</span>
-          <span>&#127881; DailyMu V1.5 — ระบบ Subscription ใหม่ Free / Plus ฿99 / Premium ฿299 พร้อมให้บริการแล้ว &#127881;</span>
+          <span>&#127881; DailyMu V1.5 — ระบบ Subscription ใหม่ Free / Plus ฿149 / Premium ฿349 พร้อมให้บริการแล้ว &#127881;</span>
           <span>&#10024; ดูดวงฮีลใจ ผสาน Thai Astrology + AI — ดาวน์โหลดฟรีวันนี้ &#10024;</span>
         </div>
       </div>

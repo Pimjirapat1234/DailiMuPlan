@@ -2,19 +2,16 @@
 const steps = [
   {
     num: '01',
-    icon: 'fa-solid fa-mobile-screen',
     title: 'ดาวน์โหลดแอป',
     desc: 'โหลดฟรีได้ทั้ง iOS และ Android ใช้เวลาไม่ถึงนาที',
   },
   {
     num: '02',
-    icon: 'fa-solid fa-user-pen',
     title: 'กรอกวันเกิด',
     desc: 'ใส่วันเกิดและเวลาเกิด (ถ้ามี) เพื่อให้ดวงแม่นยำที่สุด',
   },
   {
     num: '03',
-    icon: 'fa-solid fa-heart',
     title: 'รับกำลังใจทุกเช้า',
     desc: 'เปิดแอปดูดวงพร้อมสีมงคล AI สรุปให้ อ่านแล้วรู้สึกดี',
   },
@@ -36,10 +33,7 @@ const steps = [
           class="step-card sr-child"
           :style="{ transitionDelay: (i * 0.1) + 's' }"
         >
-          <div class="step-num">{{ step.num }}</div>
-          <div class="step-icon">
-            <i :class="step.icon"></i>
-          </div>
+          <span class="step-num">{{ step.num }}</span>
           <h3 class="step-title">{{ step.title }}</h3>
           <p class="step-desc">{{ step.desc }}</p>
         </div>
@@ -85,46 +79,40 @@ const steps = [
 
 .step-card {
   text-align: center;
-  padding: var(--space-8) var(--space-5);
+  padding: var(--space-10) var(--space-6);
   background: var(--bg-elevated);
   border-radius: var(--radius-xl);
   position: relative;
-  transition: transform 400ms var(--spring-bounce);
+  transition: transform 400ms var(--spring-bounce),
+              box-shadow 400ms var(--spring-smooth);
 }
 .step-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
 }
 
 .step-num {
-  font-size: 56px;
+  display: block;
+  font-size: 64px;
   font-weight: 800;
-  color: var(--secondary);
-  opacity: 0.1;
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-5);
+  background: linear-gradient(135deg, var(--pink-400) 0%, var(--violet-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.15;
   line-height: 1;
+  margin-bottom: var(--space-6);
 }
-.step-icon {
-  width: 56px; height: 56px;
-  border-radius: var(--radius-full);
-  background: var(--secondary);
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  margin: 0 auto var(--space-5);
-}
+
 .step-title {
-  font-size: var(--label-1-size);
-  font-weight: 700;
+  font-size: var(--heading-5-size);
+  font-weight: 800;
   color: var(--fg-high);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 .step-desc {
   font-size: var(--caption-3-size);
-  line-height: var(--caption-3-lh);
+  line-height: 1.6;
   color: var(--fg-mid);
   max-width: 260px;
   margin: 0 auto;

@@ -5,7 +5,7 @@ const faqs = reactive([
   { q: 'สมัครสมาชิกแล้วยกเลิกได้ไหม?', a: 'ได้เลย สามารถยกเลิกได้ตลอดเวลาผ่านหน้าเว็บจัดการสมาชิก โดยจะยังใช้งานได้จนครบรอบบิลปัจจุบัน', open: false },
   { q: 'ชำระเงินผ่านช่องทางไหนได้บ้าง?', a: 'รองรับบัตรเครดิต/เดบิตและ PromptPay ผ่านหน้าเว็บภายนอก (ตาม Apple Guidelines)', open: false },
   { q: 'ถ้า downgrade ข้อมูลจะหายไหม?', a: 'ไม่หาย ข้อมูลทั้งหมดยังเก็บไว้ แต่จะถูกจำกัดการเข้าถึงตาม tier ใหม่', open: false },
-  { q: 'รายปีประหยัดกว่าเท่าไหร่?', a: 'Plus รายปี ฿790 และ Premium รายปี ฿2,390 ประหยัด ~33% เทียบกับจ่ายรายเดือน', open: false },
+  { q: 'รายปีประหยัดกว่าเท่าไหร่?', a: 'Plus รายปี ฿1,390 และ Premium รายปี ฿3,290 ประหยัดเทียบกับจ่ายรายเดือน', open: false },
   { q: 'ระบบ subscription sync ทำงานอย่างไร?', a: 'แอปจะ sync สถานะอัตโนมัติเมื่อเปิดแอป, resume จาก background, ได้รับ deep link หรือ pull-to-refresh', open: false },
 ])
 function toggleFaq(i) { faqs[i].open = !faqs[i].open }
@@ -37,9 +37,8 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
                 <span class="plan-price">฿0</span>
                 <span class="plan-per">/ เดือน</span>
               </div>
-              <p class="plan-desc">เริ่มต้นดูดวงฮีลใจ ฟีเจอร์หลักครบ</p>
+              <p class="plan-desc">โหราศาสตร์ไทย (จำกัด)</p>
 
-              <a href="#" class="plan-cta cta-filled">ดาวน์โหลดฟรี</a>
             </div>
 
             <div class="plan-divider"></div>
@@ -69,12 +68,11 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
               <p class="plan-name"><i class="fa-solid fa-wand-magic-sparkles plan-name-icon"></i> DailyMu Plus</p>
 
               <div class="plan-price-row">
-                <span class="plan-price">฿99</span>
+                <span class="plan-price">฿149</span>
                 <span class="plan-per">/ เดือน</span>
               </div>
-              <p class="plan-desc">สำหรับคนที่อยากรู้มากขึ้น ไม่มีโฆษณา</p>
+              <p class="plan-desc">ครบ 2 ศาสตร์ ไทย + ปาจื่อ ไม่มีโฆษณา</p>
 
-              <a href="#" class="plan-cta cta-outline">สมัคร Plus</a>
             </div>
 
             <div class="plan-divider"></div>
@@ -83,19 +81,20 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
               <div class="feat-group">
                 <h4 class="feat-heading">ดูดวง</h4>
                 <p>ดูดวงรายวัน + สีมงคล</p>
-                <p>Calendar ย้อนหลัง 30 วัน</p>
-                <p>โปรไฟล์ 3 คน</p>
+                <p>Calendar ย้อนหลัง 14 วัน</p>
+                <p>โปรไฟล์ 2 คน</p>
+                <p>ไทย + ปาจื่อ ครบทั้งคู่</p>
               </div>
               <div class="feat-group">
                 <h4 class="feat-heading">Fortune Engines</h4>
                 <p>เซียมซี 3 ครั้ง/วัน</p>
-                <p>ไพ่ทาโรต์ 1 ครั้ง/วัน</p>
-                <p>ทำนายฝัน 3 ครั้ง/วัน</p>
+                <p>ไพ่ทาโรต์ 2 ครั้ง/วัน</p>
+                <p>ทำนายฝัน 5 ครั้ง/วัน</p>
               </div>
               <div class="feat-group">
                 <h4 class="feat-heading">อื่นๆ</h4>
                 <p>ไม่มีโฆษณา</p>
-                <p>แชร์ 3 ครั้ง/วัน</p>
+                <p>แชร์ 5 ครั้ง/วัน</p>
               </div>
             </div>
           </div>
@@ -106,12 +105,11 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
               <p class="plan-name"><i class="fa-solid fa-gem plan-name-icon"></i> DailyMu Premium</p>
 
               <div class="plan-price-row">
-                <span class="plan-price">฿299</span>
+                <span class="plan-price">฿349</span>
                 <span class="plan-per">/ เดือน</span>
               </div>
-              <p class="plan-desc">ปลดล็อคทุกฟีเจอร์ ไม่จำกัด พร้อม AI</p>
+              <p class="plan-desc">ปลดล็อคทุกฟีเจอร์ ทั้ง 2 ศาสตร์ไม่จำกัด พร้อม AI</p>
 
-              <a href="#" class="plan-cta cta-outline">สมัคร Premium</a>
             </div>
 
             <div class="plan-divider"></div>
@@ -122,6 +120,7 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
                 <p>ดูดวงรายวัน + สีมงคล</p>
                 <p>Calendar ไม่จำกัด</p>
                 <p>โปรไฟล์ 5 คน</p>
+                <p>โหราศาสตร์ไทย + ปาจื่อ</p>
               </div>
               <div class="feat-group">
                 <h4 class="feat-heading">Fortune Engines</h4>
@@ -280,7 +279,6 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
   line-height: 1.5;
   color: var(--fg-mid);
   margin-bottom: var(--space-6);
-  max-width: 280px;
 }
 
 /* CTA buttons */

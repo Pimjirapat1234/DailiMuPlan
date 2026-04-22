@@ -4,37 +4,37 @@ const features = [
     icon: 'fa-solid fa-sun',
     title: 'ดวงรายวัน + สีมงคล',
     desc: 'เช็คดวงทุกเช้าพร้อมสีมงคลประจำวัน ใช้ภาษาฮีลใจ ไม่ทำให้กังวล',
-    color: 'var(--primary)'
+    color: '#EC599D',
   },
   {
     icon: 'fa-solid fa-robot',
     title: 'AI ตีความอัจฉริยะ',
     desc: 'สรุปดวงด้วย AI ที่เข้าใจบริบท อธิบายได้อย่างมีเหตุผล',
-    color: 'var(--secondary)'
+    color: '#7279FB',
   },
   {
     icon: 'fa-solid fa-layer-group',
     title: 'เซียมซี ไพ่ทาโรต์ ทำนายฝัน',
     desc: '3 Fortune Engine ในแอปเดียว เปิดได้ทุกวัน คำตีความเชื่อมกับดวงรายวัน',
-    color: 'var(--info)'
+    color: '#36B9E6',
   },
   {
     icon: 'fa-solid fa-calendar-days',
     title: 'ปฏิทินดวงชะตา',
     desc: 'ดูดวงย้อนหลังและล่วงหน้า วางแผนวันสำคัญด้วยข้อมูลจากดาว',
-    color: 'var(--success)'
+    color: '#6ABC66',
   },
   {
     icon: 'fa-solid fa-yin-yang',
     title: '2 ระบบดวงในแอปเดียว',
     desc: 'Thai Astrology + BaZi (ปาจื่อ) ครอบคลุมกว่าแอปอื่นที่มีแค่ระบบเดียว',
-    color: 'var(--violet-400)'
+    color: '#7279FB',
   },
   {
     icon: 'fa-solid fa-share-nodes',
     title: 'แชร์การ์ดดวงสวยๆ',
     desc: 'สร้างการ์ดดวงประจำวันแชร์ให้เพื่อน พร้อม Special Themes สำหรับสมาชิก',
-    color: 'var(--pink-400)'
+    color: '#EC599D',
   },
 ]
 
@@ -84,7 +84,7 @@ function resetTilt(e) {
           @mouseleave="resetTilt($event)"
         >
           <div class="card-shine"></div>
-          <div class="feat-icon" :style="{ color: feat.color }">
+          <div class="feat-icon" :style="{ color: feat.color, backgroundColor: feat.color + '1a' }">
             <i :class="feat.icon"></i>
           </div>
           <h3 class="feat-title">{{ feat.title }}</h3>
@@ -172,7 +172,14 @@ function resetTilt(e) {
 }
 
 .feat-icon {
-  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
   margin-bottom: var(--space-5);
 }
 .feat-title {

@@ -19,10 +19,6 @@
         ทุกคำทำนายอ่านแล้วรู้สึกดี แม้วันที่ดวงไม่เป็นใจ
       </p>
 
-      <div class="hero-cta sr-child">
-        <a href="#download" class="cta-btn"><i class="fa-solid fa-download"></i> ดาวน์โหลดฟรี</a>
-      </div>
-
       <!-- Floating screenshots — 3 phones -->
       <div class="hero-phones sr-child">
         <img src="/screen-calendar.png" alt="DailyMu ปฏิทิน" class="phone phone-side-left float-slow" />
