@@ -252,6 +252,37 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+/* Cloud BG behind phone */
+.showcase-visual::before {
+  content: '';
+  position: absolute;
+  width: 140%;
+  height: 120%;
+  top: -10%;
+  left: -20%;
+  border-radius: 50%;
+  width: 420px;
+  height: 420px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background:
+    radial-gradient(circle at 35% 35%, rgba(244, 155, 196, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 65% 30%, rgba(170, 175, 253, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 50% 65%, rgba(141, 212, 232, 0.35) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 0;
+  animation: cloudFloat 8s ease-in-out infinite;
+}
+
+@keyframes cloudFloat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, calc(-50% - 8px)) scale(1.03); }
 }
 
 .phone-frame {
@@ -265,6 +296,7 @@ onUnmounted(() => {
     0 8px 24px rgba(0,0,0,0.04);
   aspect-ratio: 9 / 19.5;
   position: relative;
+  z-index: 1;
 }
 
 [data-theme="dark"] .phone-frame {

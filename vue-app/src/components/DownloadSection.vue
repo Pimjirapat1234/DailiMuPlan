@@ -16,25 +16,21 @@
             เริ่มต้นดูดวงฮีลใจวันนี้ ดาวน์โหลดฟรี แล้วพบกับเพื่อนที่เข้าใจคุณทุกเช้า
           </p>
 
-          <div class="row row-gap-md sr-child" style="margin-bottom: var(--space-8);">
-            <div class="col-12 col-sm-6 col-md-5">
-              <a href="#" class="store-btn">
-                <i class="fa-brands fa-apple store-icon"></i>
-                <div class="store-text">
-                  <span class="store-label">Download on the</span>
-                  <span class="store-name">App Store</span>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-5">
-              <a href="#" class="store-btn">
-                <span class="store-icon"><img src="/google-play-icon.png" alt="Google Play" class="store-icon-img" /></span>
-                <div class="store-text">
-                  <span class="store-label">GET IT ON</span>
-                  <span class="store-name">Google Play</span>
-                </div>
-              </a>
-            </div>
+          <div class="store-row sr-child">
+            <a href="#" class="store-btn">
+              <i class="fa-brands fa-apple store-icon"></i>
+              <div class="store-text">
+                <span class="store-label">Download on the</span>
+                <span class="store-name">App Store</span>
+              </div>
+            </a>
+            <a href="#" class="store-btn">
+              <span class="store-icon"><img src="/google-play-icon.png" alt="Google Play" class="store-icon-img" /></span>
+              <div class="store-text">
+                <span class="store-label">GET IT ON</span>
+                <span class="store-name">Google Play</span>
+              </div>
+            </a>
           </div>
 
 
@@ -118,6 +114,17 @@
   width: 26px;
   height: 26px;
   object-fit: contain;
+}
+.store-row {
+  display: flex;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+@media (max-width: 767px) {
+  .store-row {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
 }
 .store-text { display: flex; flex-direction: column; }
 .store-label {
