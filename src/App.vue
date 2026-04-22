@@ -39,6 +39,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
   <template v-if="currentPage === 'home'">
     <HeroSection />
+    hello
     <FeaturesSection />
     <HowItWorksSection />
     <ShowcaseSection />
