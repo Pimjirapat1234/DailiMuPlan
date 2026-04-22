@@ -91,9 +91,8 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
 
           <!-- PLUS — Recommended -->
           <div class="plan-col col-border col-recommended">
-            <div class="recommended-badge"><i class="fa-solid fa-crown"></i> แนะนำ</div>
             <div class="plan-top">
-              <p class="plan-name"><i class="fa-solid fa-wand-magic-sparkles plan-name-icon"></i> DailyMu Plus</p>
+              <p class="plan-name"><i class="fa-solid fa-wand-magic-sparkles plan-name-icon"></i> DailyMu Plus <span class="recommended-badge"><i class="fa-solid fa-crown"></i> แนะนำ</span></p>
 
               <div class="plan-price-row price-animated">
                 <transition name="price-slide" mode="out-in">
@@ -398,24 +397,20 @@ function toggleFaq(i) { faqs[i].open = !faqs[i].open }
   background: linear-gradient(180deg, rgba(236,89,157,0.1) 0%, rgba(114,121,251,0.1) 100%);
 }
 .recommended-badge {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
   background: linear-gradient(135deg, var(--pink-400) 0%, var(--violet-400) 100%);
   color: #fff;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
-  padding: 4px 18px;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
   white-space: nowrap;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  box-shadow: 0 4px 12px rgba(236,89,157,0.3);
+  gap: 4px;
+  vertical-align: middle;
 }
 .recommended-badge i {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 /* Check-style feature list */
