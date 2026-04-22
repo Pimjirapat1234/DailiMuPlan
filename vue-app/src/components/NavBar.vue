@@ -25,52 +25,34 @@ function scrollTo(id) {
   }
 }
 
-// Scroll spy
-let observer = null
-const sections = ['features', 'pricing', 'download']
-
-function setupScrollSpy() {
-  if (observer) observer.disconnect()
-  observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        activeSection.value = entry.target.id
-      }
-    })
-  }, { threshold: 0.3, rootMargin: '-108px 0px -40% 0px' })
-
-  setTimeout(() => {
-    sections.forEach(id => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
-  }, 200)
-}
+// Scroll spy — position based
+const navSections = ['features', 'pricing', 'download']
 
 function handleScroll() {
   if (currentPage.value !== 'home') return
-  const scrollY = window.scrollY
-  const featuresEl = document.getElementById('features')
-  if (!featuresEl) return
-  if (scrollY < featuresEl.offsetTop - 200) {
-    activeSection.value = 'home'
+  const scrollY = window.scrollY + 150
+  let current = 'home'
+  for (const id of navSections) {
+    const el = document.getElementById(id)
+    if (el && scrollY >= el.offsetTop) {
+      current = id
+    }
   }
+  activeSection.value = current
 }
 
 onMounted(() => {
-  setupScrollSpy()
   window.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll()
 })
 
 onUnmounted(() => {
-  if (observer) observer.disconnect()
   window.removeEventListener('scroll', handleScroll)
 })
 
 watch(currentPage, () => {
   if (currentPage.value === 'home') {
     activeSection.value = 'home'
-    setupScrollSpy()
   }
 })
 </script>

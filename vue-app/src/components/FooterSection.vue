@@ -45,7 +45,7 @@ const navigate = inject('navigate')
               <i class="fa-brands fa-apple"></i> App Store
             </a>
             <a href="#" class="store-mini">
-              <i class="fa-brands fa-google-play"></i> Google Play
+              <img src="/google-play-icon.png" alt="" class="footer-gplay-icon" /> Google Play
             </a>
           </div>
         </div>
@@ -127,22 +127,28 @@ const navigate = inject('navigate')
   gap: var(--space-2);
 }
 .store-mini {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
-  font-size: var(--caption-4-size);
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  background: linear-gradient(145deg, #FFFFFF 0%, #F1F2FF 50%, #FDEEF5 100%);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: var(--label-3-size);
   font-weight: 700;
   color: var(--fg-high);
   text-decoration: none;
   transition: all 300ms var(--spring-bounce);
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.08), -2px -2px 6px rgba(255,255,255,0.9);
 }
 .store-mini:hover {
-  border-color: var(--primary);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 14px rgba(0,0,0,0.12), -3px -3px 8px rgba(255,255,255,1);
+}
+.footer-gplay-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
 
 .footer-copy {
