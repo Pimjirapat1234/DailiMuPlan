@@ -1,3 +1,7 @@
+<script setup>
+const base = import.meta.env.BASE_URL
+</script>
+
 <template>
   <section v-reveal="'right'" class="download-section" id="download">
     <div class="container">
@@ -8,7 +12,7 @@
 
           <h2 class="dl-title sr-child">
             ดาวน์โหลด
-            <img src="/logo.png" alt="DailyMu" class="dl-logo" /><br>
+            <img :src="`${base}logo.png`" alt="DailyMu" class="dl-logo" /><br>
             ได้ทั้ง iOS และ Android
           </h2>
 
@@ -25,7 +29,7 @@
               </div>
             </a>
             <a href="#" class="store-btn">
-              <span class="store-icon"><img src="/google-play-icon.png" alt="Google Play" class="store-icon-img" /></span>
+              <span class="store-icon"><img :src="`${base}google-play-icon.png`" alt="Google Play" class="store-icon-img" /></span>
               <div class="store-text">
                 <span class="store-label">GET IT ON</span>
                 <span class="store-name">Google Play</span>

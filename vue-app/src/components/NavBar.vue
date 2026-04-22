@@ -1,6 +1,7 @@
 <script setup>
 import { inject, ref, onMounted, onUnmounted, watch } from 'vue'
 
+const base = import.meta.env.BASE_URL
 const navigate = inject('navigate')
 const currentPage = inject('currentPage')
 
@@ -87,7 +88,7 @@ watch(currentPage, () => {
 
       <!-- Center: Logo -->
       <a href="#" class="navbar-brand" @click.prevent="navigate('home')">
-        <img src="/logo.png" alt="DailyMu" class="navbar-logo" />
+        <img :src="`${base}logo.png`" alt="DailyMu" class="navbar-logo" />
       </a>
 
       <!-- Right: Store buttons -->
